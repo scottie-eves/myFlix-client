@@ -2953,14 +2953,16 @@ $parcel$ReactRefreshHelpers$98a3.prelude(module);
 try {
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _client = require("react-dom/client");
-var _mainView = require("./components/main-view/main-view");
 // Import statement to indicate that you need to bundle the index.scss file
 var _indexScss = require("./index.scss");
+var _mainViewJsx = require("../components/main-view/main-view.jsx");
 // this will be the main component. (and will eventually use all the others)
 const MyFlixApplication = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "my-flix",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainView.MainView), {}, void 0, false, {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            children: "Good morning"
+        }, void 0, false, {
             fileName: "src/index.jsx",
             lineNumber: 11,
             columnNumber: 13
@@ -2989,7 +2991,7 @@ $RefreshReg$(_c, "MyFlixApplication");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./index.scss":"lJZlQ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8UAXD","./components/main-view/main-view":"4gflv"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./index.scss":"lJZlQ","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8UAXD","../components/main-view/main-view.jsx":"bJOVs"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("ee51401569654d91");
 
@@ -27370,11 +27372,11 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"9b5bd90f31d5e1f1":"1eWQV"}],"4gflv":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$f7a6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"9b5bd90f31d5e1f1":"1eWQV"}],"bJOVs":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$f6a9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$f7a6.prelude(module);
+$parcel$ReactRefreshHelpers$f6a9.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -27389,34 +27391,152 @@ const MainView = ()=>{
     _s();
     const [movies, setMovies] = (0, _react.useState)([
         {
-            id: 1,
-            title: "Seven",
-            image: "seven.jpg",
-            director: "David Fincher"
+            _id: ObjectId("6601c900c6884160b8d14a0f"),
+            Title: "Seven",
+            Description: "Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.",
+            Genre: {
+                Name: "Thriller",
+                Description: "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+            },
+            Director: {
+                Name: "David Fincher",
+                Bio: "David Andrew Leo Fincher is an American film director and producer.",
+                Birth: "1962"
+            },
+            ImagePath: "seven.png",
+            Featured: true
         },
         {
-            id: 2,
-            title: "The Godfather",
-            image: "thegodfather.jpg",
-            director: "Francis Ford Coppola"
+            _id: ObjectId("6601c9e5c6884160b8d14a14"),
+            Title: "The Godfather",
+            Description: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+            Genre: {
+                Name: "Crime",
+                Description: "Crime films revolve around the sinister actions of criminals or mobsters, particularly bank robbers, underworld figures, or ruthless hoodlums who operate outside the law, stealing and murdering their way through life."
+            },
+            Director: {
+                Name: "Francis Ford Coppola",
+                Bio: "Francis Ford Coppola is an American film director, producer, and screenwriter.",
+                Birth: "1939"
+            },
+            ImagePath: "thegodfather.png",
+            Featured: true
         },
         {
-            id: 3,
-            title: "The Shawshank Redemption",
-            image: "shawshankredemption.jpg",
-            director: "Frank Darabont"
+            _id: ObjectId("6601c946c6884160b8d14a13"),
+            Title: "The Shawshank Redemption",
+            Description: "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+            Genre: {
+                Name: "Drama",
+                Description: "Drama film is a film genre that depends mostly on in-depth development of realistic characters dealing with emotional themes. Dramatic themes such as alcoholism, drug addiction, infidelity, moral dilemmas, racial prejudice, religious intolerance, poverty, class divisions, violence against women, and corruption put characters in conflict with themselves, others, society, or even natural phenomena."
+            },
+            Director: {
+                Name: "Frank Darabont",
+                Bio: "Frank Darabont is a Hungarian-American film director, screenwriter, and producer.",
+                Birth: "1959"
+            },
+            ImagePath: "shawshankredemption.png",
+            Featured: true
         },
         {
-            id: 4,
-            title: "Inception",
-            image: "inception.jpg",
-            director: "Christopher Nolan"
+            _id: ObjectId("6601c934c6884160b8d14a12"),
+            Title: "Inception",
+            Description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+            Genre: {
+                Name: "Sci-Fi",
+                Description: "Science fiction film is a genre that uses speculative, fictional science-based depictions of phenomena that are not fully accepted by mainstream science, such as extraterrestrial lifeforms, alien worlds, extrasensory perception and time travel, along with futuristic elements such as spacecraft, robots, cyborgs, interstellar travel or other technologies."
+            },
+            Director: {
+                Name: "Christopher Nolan",
+                Bio: "Christopher Edward Nolan CBE is a British and American filmmaker. Known for his Hollywood blockbusters with complex storytelling, Nolan is considered a leading filmmaker of the 21st century.",
+                Birth: "1970"
+            },
+            ImagePath: "inception.png",
+            Featured: true
         },
         {
-            id: 5,
-            title: "Silence of the Lambs",
-            image: "silenceofthelambs.jpg",
-            director: "Jonathan Demme"
+            _id: ObjectId("6601c1e8c6884160b8d14a0e"),
+            Title: "Silence of the Lambs",
+            Description: "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer.",
+            Genre: {
+                Name: "Thriller",
+                Description: "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+            },
+            Director: {
+                Name: "Jonathan Demme",
+                Bio: "Robert Jonathan Demme was an American director, producer, and screenwriter.",
+                Birth: "1944",
+                Death: "2017"
+            },
+            ImagePath: "silenceofthelambs.png",
+            Featured: true,
+            Actors: [
+                "Kasi Lemmings"
+            ]
+        },
+        {
+            _id: ObjectId("6601c9f4c6884160b8d14a15"),
+            Title: "The Matrix",
+            Description: "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+            Genre: {
+                Name: "Action",
+                Description: "Action film is a film genre in which the protagonist or protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats, and frantic chases."
+            },
+            Director: {
+                Name: "Lana Wachowski",
+                Bio: "Lana Wachowski is an American film director, screenwriter, and producer.",
+                Birth: "1965"
+            },
+            ImagePath: "thematrix.png",
+            Featured: true
+        },
+        {
+            _id: ObjectId("6601ca12c6884160b8d14a17"),
+            Title: "The Avengers",
+            Description: "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.",
+            Genre: {
+                Name: "Action",
+                Description: "Action film is a film genre in which the protagonist or protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats, and frantic chases."
+            },
+            Director: {
+                Name: "Joss Whedon",
+                Bio: "Joss Whedon is an American film and television director, producer, writer, and composer.",
+                Birth: "1964"
+            },
+            ImagePath: "theavengers.png",
+            Featured: true
+        },
+        {
+            _id: ObjectId("6601ca03c6884160b8d14a16"),
+            Title: "The Social Network",
+            Description: "As Harvard student Mark Zuckerberg creates the social networking site that would become known as Facebook, he is sued by the twins who claimed he stole their idea, and by the co-founder who was later squeezed out of the business.",
+            Genre: {
+                Name: "Drama",
+                Description: "Drama film is a film genre that depends mostly on in-depth development of realistic characters dealing with emotional themes."
+            },
+            Director: {
+                Name: "David Fincher",
+                Bio: "David Andrew Leo Fincher is an American film director and producer.",
+                Birth: "1962"
+            },
+            ImagePath: "thesocialnetwork.png",
+            Featured: true
+        },
+        {
+            _id: ObjectId("6601c913c6884160b8d14a10"),
+            Title: "Gone Girl",
+            Description: "With his wife's disappearance having become the focus of an intense media circus, a man sees the spotlight turned on him when it's suspected that he may not be innocent.",
+            Genre: {
+                Name: "Thriller",
+                Description: "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+            },
+            Director: {
+                Name: "David Fincher",
+                Bio: "David Andrew Leo Fincher is an American film director and producer.",
+                Birth: "1962"
+            },
+            ImagePath: "gonegirl.png",
+            Featured: true
         }
     ]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
@@ -27424,15 +27544,15 @@ const MainView = ()=>{
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
-        fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 48,
+        fileName: "components/main-view/main-view.jsx",
+        lineNumber: 159,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The List is empty!"
     }, void 0, false, {
-        fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 53,
+        fileName: "components/main-view/main-view.jsx",
+        lineNumber: 164,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27442,31 +27562,31 @@ const MainView = ()=>{
                     setSelectedMovie(newSelectedMovie);
                 }
             }, movie.id, false, {
-                fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 59,
+                fileName: "components/main-view/main-view.jsx",
+                lineNumber: 170,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
-        fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 57,
+        fileName: "components/main-view/main-view.jsx",
+        lineNumber: 168,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "Iy+BMIlox0+aU1oj2b4HGxyKaxY=");
+_s(MainView, "MzweIqU+rqJXHMK7gVcNDC9C584=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
 
-  $parcel$ReactRefreshHelpers$f7a6.postlude(module);
+  $parcel$ReactRefreshHelpers$f6a9.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"cSKko","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8UAXD"}],"bwuIu":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"8z54c","../movie-view/movie-view":"lNY7v","@parcel/transformer-js/src/esmodule-helpers.js":"cSKko","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8UAXD"}],"8z54c":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$42ca = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$67b2.prelude(module);
+$parcel$ReactRefreshHelpers$42ca.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -27480,7 +27600,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
         },
         children: movie.title
     }, void 0, false, {
-        fileName: "src/components/movie-card/movie-card.jsx",
+        fileName: "components/movie-card/movie-card.jsx",
         lineNumber: 3,
         columnNumber: 7
     }, undefined);
@@ -27489,7 +27609,7 @@ _c = MovieCard;
 var _c;
 $RefreshReg$(_c, "MovieCard");
 
-  $parcel$ReactRefreshHelpers$67b2.postlude(module);
+  $parcel$ReactRefreshHelpers$42ca.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
@@ -27524,11 +27644,11 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"ggaUx":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{}],"lNY7v":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$2e96 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$e9f6.prelude(module);
+$parcel$ReactRefreshHelpers$2e96.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -27542,12 +27662,12 @@ const MovieView = ({ movie, onBackClick })=>{
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                     src: movie.image
                 }, void 0, false, {
-                    fileName: "src/components/movie-view/movie-view.jsx",
+                    fileName: "components/movie-view/movie-view.jsx",
                     lineNumber: 5,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
-                fileName: "src/components/movie-view/movie-view.jsx",
+                fileName: "components/movie-view/movie-view.jsx",
                 lineNumber: 4,
                 columnNumber: 9
             }, undefined),
@@ -27556,20 +27676,20 @@ const MovieView = ({ movie, onBackClick })=>{
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                         children: "Title: "
                     }, void 0, false, {
-                        fileName: "src/components/movie-view/movie-view.jsx",
+                        fileName: "components/movie-view/movie-view.jsx",
                         lineNumber: 8,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                         children: movie.title
                     }, void 0, false, {
-                        fileName: "src/components/movie-view/movie-view.jsx",
+                        fileName: "components/movie-view/movie-view.jsx",
                         lineNumber: 9,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
-                fileName: "src/components/movie-view/movie-view.jsx",
+                fileName: "components/movie-view/movie-view.jsx",
                 lineNumber: 7,
                 columnNumber: 9
             }, undefined),
@@ -27578,20 +27698,20 @@ const MovieView = ({ movie, onBackClick })=>{
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                         children: "Director: "
                     }, void 0, false, {
-                        fileName: "src/components/movie-view/movie-view.jsx",
+                        fileName: "components/movie-view/movie-view.jsx",
                         lineNumber: 12,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                         children: movie.director
                     }, void 0, false, {
-                        fileName: "src/components/movie-view/movie-view.jsx",
+                        fileName: "components/movie-view/movie-view.jsx",
                         lineNumber: 13,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
-                fileName: "src/components/movie-view/movie-view.jsx",
+                fileName: "components/movie-view/movie-view.jsx",
                 lineNumber: 11,
                 columnNumber: 9
             }, undefined),
@@ -27599,13 +27719,13 @@ const MovieView = ({ movie, onBackClick })=>{
                 onClick: onBackClick,
                 children: "Back"
             }, void 0, false, {
-                fileName: "src/components/movie-view/movie-view.jsx",
+                fileName: "components/movie-view/movie-view.jsx",
                 lineNumber: 15,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
-        fileName: "src/components/movie-view/movie-view.jsx",
+        fileName: "components/movie-view/movie-view.jsx",
         lineNumber: 3,
         columnNumber: 7
     }, undefined);
@@ -27614,11 +27734,11 @@ _c = MovieView;
 var _c;
 $RefreshReg$(_c, "MovieView");
 
-  $parcel$ReactRefreshHelpers$e9f6.postlude(module);
+  $parcel$ReactRefreshHelpers$2e96.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
 },{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"cSKko","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"8UAXD"}]},["1iGes","hFyZ4","d8Dch"], "d8Dch", "parcelRequireaec4")
 
-//# sourceMappingURL=index.b4b6dfad.js.map
+//# sourceMappingURL=index.js.map
