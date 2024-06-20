@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MovieCard from '..movie-card/movie-card';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const ProfileView = () => {
   const [user, setUser] = useState(null);
@@ -15,8 +16,8 @@ const ProfileView = () => {
     const fetchUserData = async () => {
       try {
         const [userResponse, moviesResponse] = await Promise.all([
-          axios.get('/users'), // Endpoint to fetch user data
-          axios.get('/movies') // Endpoint to fetch movies
+          axios.get('https://flix-vault-253ef352783e.herokuapp.com/users'), // Endpoint to fetch user data
+          axios.get('https://flix-vault-253ef352783e.herokuapp.com/movies') // Endpoint to fetch movies
         ]);
 
         const userData = userResponse.data.find(user => user.username === username);
