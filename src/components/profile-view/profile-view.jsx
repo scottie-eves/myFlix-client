@@ -1,76 +1,85 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import MovieCard from '..movie-card/movie-card';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { MovieCard } from "../movie-card/movie-card";
 
-const ProfileView = () => {
-  const [user, setUser] = useState(null);
-  const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+const ProfileView = ({ movies, token }) => {
+  const [user, setUser] = useState({});
+  const [isUserUpdated, setisUserUpdated] = useState(false);
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  const favoriteMovies = movies.filter((movie) => {
+    return localUser.favoriteMovies.includes(movie._id);
+  });
 
-  const username = useState("");
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const [userResponse, moviesResponse] = await Promise.all([
-          axios.get('https://flix-vault-253ef352783e.herokuapp.com/users'), // Endpoint to fetch user data
-          axios.get('https://flix-vault-253ef352783e.herokuapp.com/movies') // Endpoint to fetch movies
-        ]);
-
-        const userData = userResponse.data.find(user => user.username === username);
-        setUser(userData);
-        setMovies(moviesResponse.data);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
+    const data = {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday,
     };
 
-    fetchUserData();
-  }, [username]);
+    fetch("https://flix-vault-253ef352783e.herokuapp.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      if (response.ok) {
+        onLoggedIn(username);
+      } else {
+        alert("Login Failed");
+      }
+    });
+  };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
-  // Filter user's favorite movies
-  const favoriteMovies = movies.filter(m => user.FavoriteMovies.includes(m._id));
+  useEffect(() => {
+    const getProfileData = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://flix-vault-253ef352783e.herokuapp.com/users`,
+          {
+            headers: {
+              Authorization: `bearer ${token}`,
+            },
+          }
+        );
+        setUser(data);
+        setisUserUpdated(false);
+      } catch (error) {
+        console.log({ error });
+      }
+    };
+    getProfileData();
+  }, [token, isUserUpdated]);
 
   return (
     <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="userProfile">
-      <Form.Label>Update Profile</Form.Label>
-      <Form.Control
-      type="text"
-      value={username}
-      />
+      <Form.Group controlId="userProfile">
+        <Form.Label>Update Profile</Form.Label>
+        <Form.Control type="text" value={user.username} />
       </Form.Group>
       <Form.Group>
         <Form.Label>Email:</Form.Label>
-        <Form.Control 
-        type="email"
-        value={email}
-        />
+        <Form.Control type="email" value={user.email} />
       </Form.Group>
       <Form.Group>
         <Form.Label>Birthday:</Form.Label>
-        <Form.Control 
-        type="date"
-        value={birthday}
-        />
+        <Form.Control type="date" value={user.birthday} />
       </Form.Group>
-        <Button type="submit">Update</Button>
-        <Form.Group>
-            <Form.Label>Favorite Movies</Form.Label>
-            <div className="favorite-movies">
-        {favoriteMovies.map(movie => (
-          <MovieCard key={movie._id} movie={movie} user={user} />
-        ))}
-            </div>
-        </Form.Group>
+      <Button type="submit">Update</Button>
+      <Form.Group>
+        <Form.Label>Favorite Movies</Form.Label>
+        <div className="favorite-movies">
+          {favoriteMovies.map((movie) => (
+            <MovieCard key={movie._id} movie={movie} user={user} />
+          ))}
+        </div>
+      </Form.Group>
       <Button onClick={() => handleDeregister(user._id)}>Deregister</Button>
     </Form>
   );
@@ -79,8 +88,8 @@ const ProfileView = () => {
   async function handleDeregister(userId) {
     try {
       await axios.delete(`/users/${userId}`);
-        alert("Deregister successful");
-        window.location.reload();
+      alert("Deregister successful");
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
