@@ -14,7 +14,7 @@ export const LoginView = ({ onLoggedIn }) => {
             Password: password
         };
 
-        fetch("https://flixnow.netlify.app/login", {
+        fetch("https://flix-vault-253ef352783e.herokuapp.com/login", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"

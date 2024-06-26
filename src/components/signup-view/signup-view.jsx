@@ -18,7 +18,7 @@ export const SignupView = () => {
             Birthday: birthday
         };
 
-        fetch("https://flixnow.netlify.app/signup", {
+        fetch("https://flix-vault-253ef352783e.herokuapp.com/signup", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
