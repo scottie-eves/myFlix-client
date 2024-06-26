@@ -22,7 +22,7 @@ const ProfileView = ({ movies, token }) => {
       Birthday: birthday,
     };
 
-    fetch("https://flix-vault-253ef352783e.herokuapp.com/login", {
+    fetch("https://flixnow.netlify.app/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ const ProfileView = ({ movies, token }) => {
     const getProfileData = async () => {
       try {
         const { data } = await axios.get(
-          `https://flix-vault-253ef352783e.herokuapp.com/users`,
+          `https://flixnow.netlify.app//users`,
           {
             headers: {
               Authorization: `bearer ${token}`,
