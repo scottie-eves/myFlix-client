@@ -18,10 +18,7 @@ export const LoginView = ({ onLoggedIn }) => {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
-    },
-    mode: 'cors',
-    credentials: 'include',
-    body: JSON.stringify(data)
+    }
 }).then((response) => {
     if (response.ok) {
         onLoggedIn(username);
