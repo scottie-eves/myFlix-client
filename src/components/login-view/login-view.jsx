@@ -18,8 +18,10 @@ export const LoginView = ({ onLoggedIn }) => {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
-    }
-}).then((response) => {
+    },
+    body: JSON.stringify(data)
+    },
+).then((response) => {
     if (response.ok) {
         onLoggedIn(username);
     } else {
