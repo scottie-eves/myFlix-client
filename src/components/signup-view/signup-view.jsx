@@ -23,9 +23,7 @@ export const SignupView = () => {
             body: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json"
-            },
-            mode: 'cors',
-            credentials: 'include',
+            }
         }).then((response) => {
             if (response.ok) {
                 alert("Signup successful");
