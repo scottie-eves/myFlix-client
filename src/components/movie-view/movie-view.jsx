@@ -2,7 +2,9 @@ import React from "react";
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button, Col, Row } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 // import "./movie-view.scss";
 
 export const MovieView = ({ movies }) => {
