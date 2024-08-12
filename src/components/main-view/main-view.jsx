@@ -36,7 +36,7 @@ export const MainView = () => {
         };
       });
 
-      setMovies(movies);
+      setMovies(moviesFromApi);
     });
   }, [token]);
 
@@ -44,10 +44,7 @@ export const MainView = () => {
     <BrowserRouter>
     <NavigationBar
     user={user}
-    onLoggedOut={() => {
-      setUser(null);
-      setToken(null);
-    }}
+    onLoggedOut={user}
     />
     <Row className="justify-content-md-center">
       <Routes>
@@ -73,7 +70,11 @@ export const MainView = () => {
             <Navigate to="/" />
           ) : (
             <Col md={5}>
-              <LoginView onLoggedIn={(user) => setUser(user)} />
+              <LoginView onLoggedIn={(user, token) => {
+                setUser(user);
+                setToken(token);
+                }}
+              />
             </Col>
           )}
           </>
