@@ -3,28 +3,28 @@ import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Col, Row } from "react-bootstrap";
-import "./movie-view.scss";
+// import "./movie-view.scss";
 
-export const MovieView = ({ movie }) => {
-  const { movieId } = useParams();
-  const [movie] = useState(movie.find((movie) => movie.id == movieId));
+export const MovieView = ({ movies }) => {
+  const { MovieID } = useParams();
+  const [movies] = useState(movies.find((movies) => movies.id == MovieID));
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.FavoriteMovies && user.FavoriteMovies.includes(movieId)) {
+    if (user && user.FavoriteMovies && user.FavoriteMovies.includes(MovieID)) {
       setIsFavorite(true);
     }
-  }, [movieId]);
+  }, [MovieID]);
 
-  const handleAddFavorite = async (movieId) => {
+  const handleAddFavorite = async (MovieID) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
       const response = await fetch(
-        `https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}/movies/${movieId}`,
+        `https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}/movies/${MovieID}`,
         {
           method: "POST",
           headers: {
@@ -42,21 +42,21 @@ export const MovieView = ({ movie }) => {
       const updatedUser = await response.json();
       localStorage.setItem("user", JSON.stringify(updatedUser));
       setIsFavorite(true);
-      updateAction(movieId);
+      updateAction(MovieID);
       alert("Movie was added to your favorites!");
     } catch (error) {
       console.log(`An error occurred adding the favorite movie: ${error.message}`);
     }
   };
 
-  const handleRemoveFavorite = async (movieId) => {
+  const handleRemoveFavorite = async (MovieID) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
       const response = await fetch(
-        `https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}/movies/${movieId}`,
+        `https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}/movies/${MovieID}`,
         {
           method: "DELETE",
           headers: {
@@ -74,7 +74,7 @@ export const MovieView = ({ movie }) => {
       const updatedUser = await response.json();
       localStorage.setItem("user", JSON.stringify(updatedUser));
       setIsFavorite(false);
-      updateAction(movieId);
+      updateAction(MovieID);
       alert("Movie was removed from your favorites!");
     } catch (error) {
       console.log(`An error occurred removing the favorite movie: ${error.message}`);
@@ -87,20 +87,20 @@ export const MovieView = ({ movie }) => {
       style={{ border: '1px solid black', padding: '10px' }}
     >
       <Col lg={6} md={12} className="mb-3">
-        <img className="w-100" src={movie.ImagePath} alt={movie.Title} />
+        <img className="w-100" src={movies.ImagePath} alt={movies.Title} />
       </Col>
       <Col lg={6} md={12}>
         <div className="mb-3">
           <span>
             <strong>Title: </strong>
           </span>
-          <span>{movie.Title}</span>
+          <span>{movies.Title}</span>
         </div>
         <div className="mb-3">
           <span>
             <strong>Description: </strong>
           </span>
-          <span>{movie.Description}</span>
+          <span>{movies.Description}</span>
         </div>
         <div className="mb-3">
           <span>
@@ -110,13 +110,13 @@ export const MovieView = ({ movie }) => {
             <span>
               <strong>Name: </strong>
             </span>
-            <span>{movie.Genre.Name}</span>
+            <span>{movies.Genre.Name}</span>
           </div>
           <div>
             <span>
               <strong>Description: </strong>
             </span>
-            <span>{movie.Genre.Description}</span>
+            <span>{movies.Genre.Description}</span>
           </div>
         </div>
         <div className="mb-3">
@@ -127,27 +127,27 @@ export const MovieView = ({ movie }) => {
             <span>
               <strong>Name: </strong>
             </span>
-            <span>{movie.Director.Name}</span>
+            <span>{movies.Director.Name}</span>
           </div>
           <div>
             <span>
               <strong>Bio: </strong>
             </span>
-            <span>{movie.Director.Bio}</span>
+            <span>{movies.Director.Bio}</span>
           </div>
         </div>
         <div className="mt-auto">
           {isFavorite ? (
             <Button
               className="btn btn-warning"
-              onClick={() => handleRemoveFavorite(movie._id)}
+              onClick={() => handleRemoveFavorite(movies._id)}
             >
               Remove from favorites
             </Button>
           ) : (
             <Button
               className="btn btn-success"
-              onClick={() => handleAddFavorite(movie._id)}
+              onClick={() => handleAddFavorite(movies._id)}
             >
               Add to favorites
             </Button>
