@@ -7,7 +7,7 @@ import "./movie-view.scss";
 
 export const MovieView = ({ movie }) => {
   const { movieId } = useParams();
-  const [movie] = useState(movies.find((movie) => movie.id == movieId));
+  const [movie] = useState(movie.find((movie) => movie.id == movieId));
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
