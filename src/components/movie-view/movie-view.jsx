@@ -22,8 +22,8 @@ export const MovieView = ({ movies }) => {
 
   const handleAddFavorite = async (MovieID) => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = localStorage.getItem("token");
+      let user = JSON.parse(localStorage.getItem("user"));
+      let token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
       const response = await fetch(
@@ -54,8 +54,8 @@ export const MovieView = ({ movies }) => {
 
   const handleRemoveFavorite = async (MovieID) => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = localStorage.getItem("token");
+      let user = JSON.parse(localStorage.getItem("user"));
+      let token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
       const response = await fetch(
