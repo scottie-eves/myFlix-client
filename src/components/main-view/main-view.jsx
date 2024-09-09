@@ -110,7 +110,7 @@ export const MainView = () => {
           </>
         }
         />
-        {/* <Route
+        <Route
         path="/"
           element={
             <>
@@ -120,8 +120,8 @@ export const MainView = () => {
                 <Col>No movies!</Col>
               ) : (
                 <>
-                {movies.map((movie) => (
-                  <Col className="mb-4" key={movie.id} md={3}>
+                {movies.map((movies) => (
+                  <Col className="mb-4" key={movies._id} md={3}>
                     <MovieCard movie={movies} />
                   </Col>
                 ))}
@@ -129,7 +129,7 @@ export const MainView = () => {
               )}
             </>
         }
-        /> */}
+        />
         </Routes>
         </Row>
         </BrowserRouter>
