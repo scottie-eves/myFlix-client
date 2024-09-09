@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -31,6 +32,8 @@ export const LoginView = ({ onLoggedIn }) => {
 };
 
     return (
+        <>
+    <h2> Welcome to Flix Vault! </h2>
         <Form onSubmit={handleSubmit} action="/">
         <Form.Group controlId="formUsername">
             <Form.Label>Username:</Form.Label>
@@ -56,5 +59,6 @@ export const LoginView = ({ onLoggedIn }) => {
             Submit
         </Button>
         </Form>
+        </>
     );
 };

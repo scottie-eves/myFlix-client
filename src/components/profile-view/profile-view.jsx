@@ -7,32 +7,36 @@ import { MovieCard } from "../movie-card/movie-card";
 const ProfileView = ({ movies, token }) => {
   const [user, setUser] = useState({});
   const [isUserUpdated, setisUserUpdated] = useState(false);
-  const localUser = JSON.parse(localStorage.getItem("user"));
-  const favoriteMovies = movies.filter((movie) => {
-    return localUser.favoriteMovies.includes(movie._id);
+  const localUser = JSON.parse(localStorage.getItem("User"));
+
+  const favoriteMovies = movies.filter((movies) => {
+    return localUser.favoriteMovies.includes(movies._id);
   });
 
+  const formData = {
+    Username: username,
+    Password: password,
+    Email: email
+  };
+
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(event);
 
-    const data = {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday,
-    };
-
-    fetch("https://flix-vault-253ef352783e.herokuapp.com/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((response) => {
+    fetch(
+      `https://flix-vault-253ef352783e.herokuapp.com/users/${storedUser.Username}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+    ).then((response) => {
       if (response.ok) {
         onLoggedIn(username);
       } else {
-        alert("Login Failed");
+        alert("Failed");
       }
     });
   };
@@ -41,7 +45,7 @@ const ProfileView = ({ movies, token }) => {
     const getProfileData = async () => {
       try {
         const { data } = await axios.get(
-          `https://flix-vault-253ef352783e.herokuapp.com/users`,
+          `https://flix-vault-253ef352783e.herokuapp.com/users/${storedUser.Username}`,
           {
             headers: {
               Authorization: `bearer ${token}`,
@@ -75,8 +79,8 @@ const ProfileView = ({ movies, token }) => {
       <Form.Group>
         <Form.Label>Favorite Movies</Form.Label>
         <div className="favorite-movies">
-          {favoriteMovies.map((movie) => (
-            <MovieCard key={movie._id} movie={movie} user={user} />
+          {favoriteMovies.map((movies) => (
+            <MovieCard key={movies._id} movie={movies} user={user} />
           ))}
         </div>
       </Form.Group>
