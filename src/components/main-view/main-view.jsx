@@ -135,3 +135,6 @@ export const MainView = () => {
         </BrowserRouter>
   );
 };
+
+console.log('User', user);
+console.log('Movies', movies);
