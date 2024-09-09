@@ -25,11 +25,11 @@ export const MainView = () => {
     }
 
     fetch("https://flix-vault-253ef352783e.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}` }
+      // headers: { Authorization: `Bearer ${token}` }
     })
     .then((response) => response.json())
     .then((data) => {
-      const moviesFromApi = data.movies.map((movies) => {
+      const moviesFromApi = data.map((movies) => {
         return {
           id: movies._id,
           title: movies.Title,
