@@ -110,7 +110,7 @@ export const MainView = () => {
           </>
         }
         />
-        <Route
+        {/* <Route
         path="/"
           element={
             <>
@@ -129,7 +129,7 @@ export const MainView = () => {
               )}
             </>
         }
-        />
+        /> */}
         </Routes>
         </Row>
         </BrowserRouter>
