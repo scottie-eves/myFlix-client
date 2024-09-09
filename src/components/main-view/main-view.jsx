@@ -29,10 +29,10 @@ export const MainView = () => {
     .then((data) => {
       const moviesFromApi = data.movies.map((movies) => {
         return {
-          id: movies.id,
-          title: movies.title,
+          id: movies._id,
+          title: movies.Title,
           image: movies.ImagePath,
-          director: movies.director_name?.[0],
+          director: movies.Director_name?.[0],
         };
       });
 
