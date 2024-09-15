@@ -24,8 +24,8 @@ export const LoginView = ({ onLoggedIn }) => {
     },
 ).then((response) => {
     if (response.ok) {
-        localStorage.setItem("user", JSON.stringify("user"));
-        localStorage.setItem("token", JSON.stringify("token"));
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", JSON.stringify(token));
         onLoggedIn(username);
     } else {
         alert("Login Failed");
