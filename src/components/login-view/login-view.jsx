@@ -3,6 +3,8 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+import '../../index.scss';
+
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -21,15 +23,16 @@ export const LoginView = ({ onLoggedIn }) => {
         "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
-    },
-).then((response) => {
-    if (response.ok) {
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("token", JSON.stringify(token));
-        onLoggedIn(username);
-    } else {
-        alert("Login Failed");
-    }
+    }).then((response) => response.json())
+    .then((data) => {
+        console.log('Login Response', data);
+        if (data.user) {
+            localStorage.setItem("user", JSON.stringify(data.user));
+            localStorage.setItem("token", data.token);
+            onLoggedIn(data.user, data.token);
+        } else {
+            alert('Login Failed');
+        }
 });
 };
 
