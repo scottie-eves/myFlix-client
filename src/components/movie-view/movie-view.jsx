@@ -5,11 +5,11 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./movie-view.scss";
 
-export const MovieView = ({ movie }) => {
+export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
   const movie = movie.find((movie) => movie._id === movieId);
 
-  if (!movie) {
+  if (!movies) {
     console.error(`No movie found with ID: ${movieId}`);
     return <div>No movie was found.</div>;
   }
