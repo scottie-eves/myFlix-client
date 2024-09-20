@@ -12,7 +12,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
 
     return (
       <Card className="h-100">
-        <Card.Img variant="top" src={movies.image} />
+        <Card.Img variant="top" src={movies.Image} />
         <Card.Body>
           <Card.Title>{movies.Title}</Card.Title>
           <Card.Text>{movies.Director}</Card.Text>
@@ -50,7 +50,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
   };
 
   MovieCard.PropTypes = {
-    movie: PropTypes.shape({
+    movies: PropTypes.shape({
       _id: PropTypes.string.isRequired,
       Title: PropTypes.string.isRequired,
       Director: PropTypes.string.isRequired
