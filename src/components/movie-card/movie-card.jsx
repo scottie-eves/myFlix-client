@@ -18,11 +18,11 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
           <Card.Text></Card.Text>
           <Row>
           <Col>
-            {/* <Link to={`/movies/${encodeURIComponent(movies.id)}`}> */}
+            {/* <Link to={`/movies/${encodeURIComponent(movies.id)}`}>
               <Button variant="primary" className="primary-button_custom">
                 Open
               </Button>
-            </Link>
+            </Link> */}
           </Col>
           <Col>
             {isFavorite ? (
