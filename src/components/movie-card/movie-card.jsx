@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export const MovieCard = ({ movies }) => {
     return (
       <Card className="h-100">
-        <Card.Img variant="top" src={movies.ImagePath} />
+        <Card.Img variant="top" src={movies.image} />
         <Card.Body>
           <Card.Title>{movies.Title}</Card.Title>
           <Card.Text>{movies.Director}</Card.Text>
