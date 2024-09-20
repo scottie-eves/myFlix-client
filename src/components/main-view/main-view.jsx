@@ -39,6 +39,9 @@ export const MainView = () => {
         };
       });
       setMovies(moviesFromApi);
+    })
+    .catch((error) => {
+      console.error("Error fetching movies:", error);
     });
   }, [token]);
 
