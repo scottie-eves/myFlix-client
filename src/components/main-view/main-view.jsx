@@ -30,7 +30,7 @@ export const MainView = () => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      const moviesFromApi = (data.movie || []).map((doc) => {
+      const moviesFromApi = data.map((doc) => {
         return {
           id: doc._id,
           title: doc.Title,
@@ -39,14 +39,8 @@ export const MainView = () => {
         };
       });
       setMovies(moviesFromApi);
-    })
-    .catch((error) => {
-      console.error("Error fetching movies:", error);
     });
   }, [token]);
-
-console.log('User', user);
-console.log('Movies', movies);
 
   return (
     <BrowserRouter>
