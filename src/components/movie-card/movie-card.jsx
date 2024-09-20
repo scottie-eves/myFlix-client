@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
+export const MovieCard = ({ movie, addFavorite, deleteFavorite, user }) => {
 
   // const isFavorite = user.includes(movies.id);
 
@@ -15,11 +15,11 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
       <Card className="h-100">
         <Card.Img variant="top" />
         <Card.Body>
-          <Card.Title>{movies.Title}</Card.Title>
-          <Card.Text>{movies.Director}</Card.Text>
+          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Text>{movie.Director}</Card.Text>
           <Row>
           <Col>
-            {/* <Link to={`/movies/${encodeURIComponent(movies.id)}`}>
+            {/* <Link to={`/movies/${encodeURIComponent(movies._id)}`}>
               <Button variant="primary" className="primary-button_custom">
                 Open
               </Button>
@@ -30,7 +30,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                // onClick={() => deleteFavorite(movies.id)}
+                // onClick={() => deleteFavorite(movies._id)}
               >
                 Unfavorite
               </Button>
@@ -38,7 +38,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                // onClick={() => addFavorite(movies.id)}
+                // onClick={() => addFavorite(movies._id)}
               >
                 Favorite
               </Button>
@@ -51,8 +51,8 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
   };
 
   MovieCard.PropTypes = {
-    movies: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+    movie: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
       Title: PropTypes.string.isRequired,
       Director: PropTypes.string.isRequired
     }).isRequired,
