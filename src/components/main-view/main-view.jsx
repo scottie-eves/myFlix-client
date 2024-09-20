@@ -42,6 +42,8 @@ export const MainView = () => {
     });
   }, [token]);
 
+  console.log("user" , user);
+
   return (
     <BrowserRouter>
     <NavigationBar
