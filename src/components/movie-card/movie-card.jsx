@@ -26,7 +26,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
             </Link> */}
           </Col>
           <Col>
-            {isFavorite ? (
+            {/* {isFavorite ? (
               <Button
                 variant='primary'
                 className='primary-button_custom'
@@ -42,7 +42,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
               >
                 Favorite
               </Button>
-            )}
+            )} */}
           </Col>
         </Row>
         </Card.Body>
