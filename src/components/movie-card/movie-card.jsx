@@ -12,7 +12,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
 
     return (
       <Card className="h-100">
-        <Card.Img variant="top" src={movies.Image} />
+        <Card.Img variant="top" />
         <Card.Body>
           <Card.Title>{movies.Title}</Card.Title>
           <Card.Text>{movies.Director}</Card.Text>
