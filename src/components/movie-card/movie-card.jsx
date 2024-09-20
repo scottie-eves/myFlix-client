@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
 
-  const isFavorite = user.FavoriteMovies.includes(movies._id);
+  const isFavorite = user.includes(movies._id);
 
     return (
       <Card className="h-100">
@@ -18,7 +18,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
           <Card.Text></Card.Text>
           <Row>
           <Col>
-            <Link to={`/movies/${encodeURIComponent(movies.id)}`}>
+            <Link to={`/movies/${encodeURIComponent(movies._id)}`}>
               <Button variant="primary" className="primary-button_custom">
                 Open
               </Button>
@@ -29,7 +29,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                onClick={() => deleteFavorite(movies.id)}
+                onClick={() => deleteFavorite(movies._id)}
               >
                 Unfavorite
               </Button>
@@ -37,7 +37,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                onClick={() => addFavorite(movies.id)}
+                onClick={() => addFavorite(movies._id)}
               >
                 Favorite
               </Button>
@@ -51,7 +51,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
 
   MovieCard.PropTypes = {
     movies: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
       Title: PropTypes.string.isRequired,
       Director: PropTypes.string.isRequired
     }).isRequired,
