@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
 
-  const isFavorite = user.includes(movies.id);
+  const isFavorite = (user.favorites || []).includes(movies.id);
 
     return (
       <Card className="h-100">
@@ -55,6 +55,11 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
       Title: PropTypes.string.isRequired,
       Director: PropTypes.string.isRequired
     }).isRequired,
+    user: PropTypes.shape({
+      favorites: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }).isRequired,
+    addFavorite: PropTypes.func.isRequired,
+    deleteFavorite: PropTypes.func.isRequired,
   };
 
   export default MovieCard;
