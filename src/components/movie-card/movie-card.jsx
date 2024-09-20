@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
 
-  const isFavorite = user.FavoriteMovies.includes(movies._id);
-  
+  const isFavorite = user.FavoriteMovies.includes(movies.id);
+
     return (
       <Card className="h-100">
         <Card.Img variant="top" src={movies.image} />
@@ -18,7 +18,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
           <Card.Text>{movies.Director}</Card.Text>
           <Row>
           <Col>
-            <Link to={`/movies/${encodeURIComponent(movies._id)}`}>
+            <Link to={`/movies/${encodeURIComponent(movies.id)}`}>
               <Button variant="primary" className="primary-button_custom">
                 Open
               </Button>
@@ -29,7 +29,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                onClick={() => deleteFavorite(movies._id)}
+                onClick={() => deleteFavorite(movies.id)}
               >
                 Unfavorite
               </Button>
@@ -37,7 +37,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                onClick={() => addFavorite(movies._id)}
+                onClick={() => addFavorite(movies.id)}
               >
                 Favorite
               </Button>
