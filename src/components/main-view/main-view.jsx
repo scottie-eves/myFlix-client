@@ -30,12 +30,12 @@ export const MainView = () => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      const moviesFromApi = data.movies.map((movies) => {
+      const moviesFromApi = data.docs.map((doc) => {
         return {
-          id: movies._id,
-          title: movies.Title,
-          image: movies.ImagePath,
-          director: movies.Director_name?.[0],
+          id: doc._id,
+          title: doc.Title,
+          image: doc.ImagePath,
+          director: doc.Director_name?.[0],
         };
       });
       localStorage.setItem('movies', JSON.stringify(moviesFromApi));
