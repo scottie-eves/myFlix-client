@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
 
-  // const isFavorite = user.FavoriteMovies.includes(movies._id);
+  const isFavorite = user.FavoriteMovies.includes(movies._id);
 
     return (
       <Card className="h-100">
@@ -18,11 +18,11 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
           <Card.Text></Card.Text>
           <Row>
           <Col>
-            {/* <Link to={`/movies/${encodeURIComponent(movies.id)}`}>
+            <Link to={`/movies/${encodeURIComponent(movies.id)}`}>
               <Button variant="primary" className="primary-button_custom">
                 Open
               </Button>
-            </Link> */}
+            </Link>
           </Col>
           <Col>
             {isFavorite ? (
@@ -56,3 +56,5 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
       Director: PropTypes.string.isRequired
     }).isRequired,
   };
+
+  export default MovieCard;
