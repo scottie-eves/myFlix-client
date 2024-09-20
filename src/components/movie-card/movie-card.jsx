@@ -18,7 +18,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
           <Card.Text></Card.Text>
           <Row>
           <Col>
-            <Link to={`/movies/${encodeURIComponent(movies._id)}`}>
+            <Link to={`/movies/${encodeURIComponent(movies.id)}`}>
               <Button variant="primary" className="primary-button_custom">
                 Open
               </Button>
@@ -29,7 +29,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                onClick={() => deleteFavorite(movies._id)}
+                onClick={() => deleteFavorite(movies.id)}
               >
                 Unfavorite
               </Button>
@@ -37,7 +37,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                onClick={() => addFavorite(movies._id)}
+                onClick={() => addFavorite(movies.id)}
               >
                 Favorite
               </Button>
@@ -51,7 +51,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
 
   MovieCard.PropTypes = {
     movies: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
       Title: PropTypes.string.isRequired,
       Director: PropTypes.string.isRequired
     }).isRequired,
