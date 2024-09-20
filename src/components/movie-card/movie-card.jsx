@@ -9,8 +9,7 @@ import { useState } from "react";
 
 export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
 
-  const user = useState(storedUser ? storedUser : null);
-  const isFavorite = user.includes(movies.id);
+  // const isFavorite = user.includes(movies.id);
 
     return (
       <Card className="h-100">
@@ -20,18 +19,18 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
           <Card.Text></Card.Text>
           <Row>
           <Col>
-            <Link to={`/movies/${encodeURIComponent(movies.id)}`}>
+            {/* <Link to={`/movies/${encodeURIComponent(movies.id)}`}>
               <Button variant="primary" className="primary-button_custom">
                 Open
               </Button>
-            </Link>
+            </Link> */}
           </Col>
           <Col>
             {isFavorite ? (
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                onClick={() => deleteFavorite(movies.id)}
+                // onClick={() => deleteFavorite(movies.id)}
               >
                 Unfavorite
               </Button>
@@ -39,7 +38,7 @@ export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                onClick={() => addFavorite(movies.id)}
+                // onClick={() => addFavorite(movies.id)}
               >
                 Favorite
               </Button>
