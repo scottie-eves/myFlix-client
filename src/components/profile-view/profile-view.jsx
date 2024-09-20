@@ -4,13 +4,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { MovieCard } from "../movie-card/movie-card";
 
-const ProfileView = ({ movies, token }) => {
+const ProfileView = ({ movie, token }) => {
   const [user, setUser] = useState({});
   const [isUserUpdated, setisUserUpdated] = useState(false);
   const localUser = JSON.parse(localStorage.getItem("User"));
 
-  const favoriteMovies = movies.filter((movies) => {
-    return localUser.favoriteMovies.includes(movies._id);
+  const favoriteMovies = movie.filter((movie) => {
+    return localUser.FavoriteMovies.includes(movie._id);
   });
 
   const formData = {
@@ -79,8 +79,8 @@ const ProfileView = ({ movies, token }) => {
       <Form.Group>
         <Form.Label>Favorite Movies</Form.Label>
         <div className="favorite-movies">
-          {favoriteMovies.map((movies) => (
-            <MovieCard key={movies._id} movie={movies} user={user} />
+          {FavoriteMovies.map((movie) => (
+            <MovieCard key={movie._id} movie={movie} user={user} />
           ))}
         </div>
       </Form.Group>

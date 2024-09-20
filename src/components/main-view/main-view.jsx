@@ -83,20 +83,6 @@ export const MainView = () => {
           </>
         }
         />
-         <Route
-        path="/profile"
-        element={
-          <>
-          {user ? (
-            <Navigate to="/profile" />
-          ) : (
-            <Col md={5}>
-              <ProfileView onLoggedIn={(user) => setUser(user)} />
-            </Col>
-          )}
-          </>
-        }
-        />
         <Route
         path="/movies/:MovieId"
         element={
@@ -108,6 +94,20 @@ export const MainView = () => {
           ) : (
             <Col md={8}>
               <MovieView movie={movies} />
+            </Col>
+          )}
+          </>
+        }
+        />
+         <Route
+        path="/profile"
+        element={
+          <>
+          {user ? (
+            <Navigate to="/profile" />
+          ) : (
+            <Col md={5}>
+              <ProfileView onLoggedIn={(user) => setUser(user)} />
             </Col>
           )}
           </>

@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie, addFavorite, deleteFavorite, user }) => {
 
-  // const isFavorite = user.includes(movies.id);
-
     return (
       <Card className="h-100">
         <Card.Img variant="top" />
