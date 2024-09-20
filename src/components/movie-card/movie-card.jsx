@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movies, addFavorite, deleteFavorite, user }) => {
 
-  const isFavorite = (user.favorites || []).includes(movies.id);
+  const isFavorite = (user?.favorites || []).includes(movies.id);
 
     return (
       <Card className="h-100">
