@@ -18,7 +18,7 @@ export const MovieView = ({ movies }) => {
       <Card className="h-100">
         <Row>
           <Col>
-          <Card.Img variant="top" src={movies.image} />
+          <Card.Img variant="top" src={movie.image} />
           </Col>
           <Col>
           <Card.Body>
