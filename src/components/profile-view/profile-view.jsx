@@ -79,7 +79,7 @@ const ProfileView = ({ movie, token }) => {
       <Form.Group>
         <Form.Label>Favorite Movies</Form.Label>
         <div className="favorite-movies">
-          {FavoriteMovies.map((movie) => (
+          {favoriteMovies.map((movie) => (
             <MovieCard key={movie._id} movie={movie} user={user} />
           ))}
         </div>
