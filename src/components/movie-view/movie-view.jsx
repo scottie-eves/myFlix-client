@@ -7,7 +7,11 @@ import "./movie-view.scss";
 
 export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
-  const movie = movies.find((m) => m._id === movieId);
+
+  console.log('movieId from useParams:', movieId);
+  console.log('List of _id fields from movies:', movies.map(m => m._id));
+  
+  const movie = movies.find((m) => String(m._id) === String(movieId));
 
   if (!movie) {
     console.error(`No movie found with ID: ${movieId}`);
