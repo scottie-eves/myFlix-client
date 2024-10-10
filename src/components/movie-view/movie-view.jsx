@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./movie-view.scss";
@@ -10,6 +10,11 @@ export const MovieView = ({ movies }) => {
 
   console.log('movieId from useParams:', movieId);
   console.log('List of _id fields from movies:', movies.map(m => m._id));
+
+  if (!movies || movies.length === 0) {
+    console.error("Movies array is undefined or empty");
+    return <div>Loading...</div>;
+  }
 
   const movie = movies.find((m) => m._id === movieId);
 

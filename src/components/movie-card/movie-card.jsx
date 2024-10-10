@@ -10,10 +10,10 @@ export const MovieCard = ({ movie, addFavorite, deleteFavorite, user }) => {
 
     return (
       <Card className="h-100">
-        <Card.Img variant="top" />
+        <Card.Img variant="top" src={movie.ImagePath} />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>{movie.Director}</Card.Text>
+          <Card.Text>Directed by: {movie.Director}</Card.Text>
           <Row>
           <Col>
             <Link to={`/movies/${encodeURIComponent(movie._id)}`}>

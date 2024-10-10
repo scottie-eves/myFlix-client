@@ -36,6 +36,8 @@ export const MainView = () => {
           title: doc.Title,
           image: doc.ImagePath,
           director: doc.Director?.Name || "Unknown",
+          genre: doc.Genre?.Name || "Unknown",
+          description: doc.Description,
         };
       });
       setMovies(moviesFromApi);
@@ -91,8 +93,6 @@ export const MainView = () => {
           <>
           {!user ? (
             <Navigate to="/login" replace />
-          ) : movies.length === 0 ? (
-            <Col>Empty list of movies!</Col>
           ) : (
             <Col md={8}>
               <MovieView movie={movies} />
