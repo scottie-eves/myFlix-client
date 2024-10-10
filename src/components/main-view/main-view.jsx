@@ -35,7 +35,7 @@ export const MainView = () => {
           id: doc._id,
           title: doc.Title,
           image: doc.ImagePath,
-          director: doc.Director_name?.[0],
+          director: doc.Director?.Name || "Unknown",
         };
       });
       setMovies(moviesFromApi);
