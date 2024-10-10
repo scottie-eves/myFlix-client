@@ -4,14 +4,16 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { MovieCard } from "../movie-card/movie-card";
 
-const ProfileView = ({ movie, token }) => {
+const ProfileView = ({ movies, token }) => {
   const [user, setUser] = useState({});
   const [isUserUpdated, setisUserUpdated] = useState(false);
   const localUser = JSON.parse(localStorage.getItem("User"));
 
-  const favoriteMovies = movie.filter((movie) => {
-    return localUser.FavoriteMovies.includes(movie._id);
-  });
+  const favoriteMovies = movies ? movies.filter((movie) => localUser.FavoriteMovies.includes(movie.id)) : []; 
+
+  const [username, setUsername] = useState(user.username || "");
+  const [email, setEmail] = useState(user.email || "");
+  const [password, setPassword] = useState("");
 
   const formData = {
     Username: username,
@@ -20,10 +22,10 @@ const ProfileView = ({ movie, token }) => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault(event);
+    event.preventDefault();
 
     fetch(
-      `https://flix-vault-253ef352783e.herokuapp.com/users/${storedUser.Username}`,
+      `https://flix-vault-253ef352783e.herokuapp.com/users/${localUser.Username}`,
       {
         method: 'PUT',
         body: JSON.stringify(formData),
@@ -45,7 +47,7 @@ const ProfileView = ({ movie, token }) => {
     const getProfileData = async () => {
       try {
         const { data } = await axios.get(
-          `https://flix-vault-253ef352783e.herokuapp.com/users/${storedUser.Username}`,
+          `https://flix-vault-253ef352783e.herokuapp.com/users/${localUser.Username}`,
           {
             headers: {
               Authorization: `bearer ${token}`,
@@ -65,11 +67,11 @@ const ProfileView = ({ movie, token }) => {
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="userProfile">
         <Form.Label>Update Profile</Form.Label>
-        <Form.Control type="text" value={user.username} />
+        <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
       </Form.Group>
       <Form.Group>
         <Form.Label>Email:</Form.Label>
-        <Form.Control type="email" value={user.email} />
+        <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
       </Form.Group>
       <Form.Group>
         <Form.Label>Birthday:</Form.Label>
