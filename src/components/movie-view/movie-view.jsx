@@ -6,18 +6,18 @@ import Row from "react-bootstrap/Row";
 import "./movie-view.scss";
 
 export const MovieView = ({ movies }) => {
-  const {movieId} = useParams();
+  const { movieId } = useParams();
 
   if (!movies || movies.length === 0) {
     console.error("Movies array is undefined or empty");
-    return <div>Loading...</div>;
+    return <div>Loading movie details...</div>;
   }
 
   // log to check the movieId and movies
   console.log('movieId from useParams:', movieId);
-  console.log('List of _id fields from movies:', movies.map(m => m.id));
+  console.log('List of id fields from movies:', movies.map(m => m.id));
 
-  const movie = movies.find((m) => m._id === movieId);
+  const movie = movies.find((m) => m.id === movieId);
 
   if (!movie) {
     console.error(`No movie found with ID: ${movieId}`);
