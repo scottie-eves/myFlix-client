@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Button, Card } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import "./movie-view.scss";
+// import "./movie-view.scss";
 
 export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
