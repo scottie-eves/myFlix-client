@@ -32,7 +32,7 @@ export const MainView = () => {
       console.log(data);
       const moviesFromApi = data.map((doc) => {
         return {
-          id: doc.id,
+          id: doc._id,
           title: doc.Title,
           image: doc.ImagePath,
           director: doc.Director_name?.[0],
