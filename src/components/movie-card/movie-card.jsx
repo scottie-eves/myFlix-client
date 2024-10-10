@@ -19,28 +19,22 @@ export const MovieCard = ({ movie, addFavorite, deleteFavorite, user }) => {
             <Link to={`/movies/${movie.id}`}>
               <Button 
               variant="info" 
-              className="primary-button_custom"
-              me-2
-              mb-2>
+              className="primary-button_custom me-2 mb-2">
                 Open
               </Button>
             </Link>
           </Col>
           <Col>
               <Button
-                variant='danger'
-                className='unfavorite-button_custom'
-                me-2
-                mb-2
+                variant="danger"
+                className="unfavorite-button_custom me-2 mb-2"
                 onClick={() => deleteFavorite(movie.id)}
               >
                 Unfavorite
               </Button>
               <Button
-                variant='danger'
-                className='favorite-button_custom'
-                me-2
-                mb-2
+                variant="danger"
+                className="favorite-button_custom me-2 mb-2"
                 onClick={() => addFavorite(movie.id)}
               >
                 Favorite
