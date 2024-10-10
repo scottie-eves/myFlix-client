@@ -42,6 +42,8 @@ export const MainView = () => {
     });
   }, [token]);
 
+  console.log(movies);
+
   console.log("user" , user);
 
   return (
@@ -104,10 +106,10 @@ export const MainView = () => {
         element={
           <>
           {user ? (
-            <Navigate to="/profile" />
+            <ProfileView onLoggedIn={(user) => setUser(user)} />
           ) : (
             <Col md={5}>
-              <ProfileView onLoggedIn={(user) => setUser(user)} />
+              <Navigate to="/login" />
             </Col>
           )}
           </>
