@@ -9,7 +9,7 @@ export const MovieView = ({ movies }) => {
   const {movieId} = useParams();
 
   console.log('movieId from useParams:', movieId);
-  console.log('List of _id fields from movies:', movies.map(m => m.id));
+  console.log('List of _id fields from movies:', movies.map(m => m._id));
 
   const movie = movies.find((m) => m.id === movieId);
 

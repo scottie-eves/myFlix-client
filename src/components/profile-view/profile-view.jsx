@@ -10,7 +10,7 @@ const ProfileView = ({ movie, token }) => {
   const localUser = JSON.parse(localStorage.getItem("User"));
 
   const favoriteMovies = movie.filter((movie) => {
-    return localUser.FavoriteMovies.includes(movie.id);
+    return localUser.FavoriteMovies.includes(movie._id);
   });
 
   const formData = {
@@ -80,11 +80,11 @@ const ProfileView = ({ movie, token }) => {
         <Form.Label>Favorite Movies</Form.Label>
         <div className="favorite-movies">
           {favoriteMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} user={user} />
+            <MovieCard key={movie._id} movie={movie} user={user} />
           ))}
         </div>
       </Form.Group>
-      <Button onClick={() => handleDeregister(user.id)}>Deregister</Button>
+      <Button onClick={() => handleDeregister(user._id)}>Deregister</Button>
     </Form>
   );
 
