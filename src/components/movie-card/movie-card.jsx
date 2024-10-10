@@ -10,13 +10,13 @@ export const MovieCard = ({ movie, addFavorite, deleteFavorite, user }) => {
 
     return (
       <Card className="h-100">
-        <Card.Img variant="top" src={movie.ImagePath} />
+        <Card.Img variant="top" src={movie.image} />
         <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
-          <Card.Text>Directed by: {movie.Director}</Card.Text>
+          <Card.Title>{movie.title}</Card.Title>
+          <Card.Text>Directed by: {movie.director}</Card.Text>
           <Row>
           <Col>
-            <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
+            <Link to={`/movies/${movie.id}`}>
               <Button variant="primary" className="primary-button_custom">
                 Open
               </Button>
@@ -26,14 +26,14 @@ export const MovieCard = ({ movie, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                onClick={() => deleteFavorite(movie._id)}
+                onClick={() => deleteFavorite(movie.id)}
               >
                 Unfavorite
               </Button>
               <Button
                 variant='primary'
                 className='primary-button_custom'
-                onClick={() => addFavorite(movie._id)}
+                onClick={() => addFavorite(movie.id)}
               >
                 Favorite
               </Button>

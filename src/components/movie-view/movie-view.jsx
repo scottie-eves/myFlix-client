@@ -8,15 +8,16 @@ import "./movie-view.scss";
 export const MovieView = ({ movies }) => {
   const {movieId} = useParams();
 
-  console.log('movieId from useParams:', movieId);
-  console.log('List of _id fields from movies:', movies.map(m => m._id));
-
   if (!movies || movies.length === 0) {
     console.error("Movies array is undefined or empty");
     return <div>Loading...</div>;
   }
 
-  const movie = movies.find((m) => m._id === movieId);
+  // log to check the movieId and movies
+  console.log('movieId from useParams:', movieId);
+  console.log('List of _id fields from movies:', movies.map(m => m.id));
+
+  const movie = movies.find((m) => m.id === movieId);
 
   if (!movie) {
     console.error(`No movie found with ID: ${movieId}`);
@@ -31,10 +32,10 @@ export const MovieView = ({ movies }) => {
           </Col>
           <Col>
           <Card.Body>
-            <Card.Title>{movie.Title}</Card.Title>
-            <Card.Text>{"Director: " + movie.Director}</Card.Text>
-            <Card.Text>{"Genre: " + movie.Genre}</Card.Text>
-            <Card.Text>{"Description: " + movie.Description}</Card.Text>
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>{"Director: " + movie.director}</Card.Text>
+            <Card.Text>{"Genre: " + movie.genre}</Card.Text>
+            <Card.Text>{"Description: " + movie.description}</Card.Text>
             <Link to="/">
             <Button variant="info" className="primary-button_custom">Back</Button>
             </Link>
