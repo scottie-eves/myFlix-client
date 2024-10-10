@@ -17,7 +17,7 @@ export const MovieView = ({ movies }) => {
   console.log('movieId from useParams:', movieId);
   console.log('List of _id fields from movies:', movies.map(m => m.id));
 
-  const movie = movies.find((m) => m.id === movieId);
+  const movie = movies.find((m) => m._id === movieId);
 
   if (!movie) {
     console.error(`No movie found with ID: ${movieId}`);
