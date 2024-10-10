@@ -32,7 +32,7 @@ export const MainView = () => {
       console.log(data);
       const moviesFromApi = data.map((doc) => {
         return {
-          id: doc._id,
+          id: doc.id,
           title: doc.Title,
           image: doc.ImagePath,
           director: doc.Director_name?.[0],
@@ -124,7 +124,7 @@ export const MainView = () => {
               ) : (
                 <>
                 {movies.map((movies) => (
-                  <Col className="mb-4" key={movies._id} md={3}>
+                  <Col className="mb-4" key={movies.id} md={3}>
                     <MovieCard movie={movies} />
                   </Col>
                 ))}
