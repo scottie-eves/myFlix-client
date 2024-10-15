@@ -19,45 +19,33 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
 
   const addFavorite = (movieId) => {
-    const updatedFavorites = [...user.FavoriteMovies, movieId];
-
-    fetch(`https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        FavoriteMovies: updatedFavorites,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUser(data);
-        localStorage.setItem("user", JSON.stringify(data));  // Update the user in localStorage
-      })
-      .catch((error) => console.log(error));
+    // Find the movie and update its favorite status
+    const updatedMovies = movies.map((movie) => {
+      if (movie.id === movieId) {
+        return { ...movie, isFavorite: true };  // Add a flag for favorites or adjust logic as needed
+      }
+      return movie;
+    });
+  
+    // Update the movies state with the modified list
+    setMovies(updatedMovies);
+  
+    console.log('Updated Movies after Adding Favorite:', updatedMovies);  // Logging for debugging
   };
-
+  
   const deleteFavorite = (movieId) => {
-    const updatedFavorites = user.FavoriteMovies.filter((id) => id !== movieId);
-
-    fetch(`https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        FavoriteMovies: updatedFavorites,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUser(data);
-        localStorage.setItem("user", JSON.stringify(data));  // Update the user in localStorage
-      })
-      .catch((error) => console.log(error));
+    // Find the movie and update its favorite status
+    const updatedMovies = movies.map((movie) => {
+      if (movie.id === movieId) {
+        return { ...movie, isFavorite: false };  // Remove the favorite flag or adjust logic as needed
+      }
+      return movie;
+    });
+  
+    // Update the movies state with the modified list
+    setMovies(updatedMovies);
+  
+    console.log('Updated Movies after Removing Favorite:', updatedMovies);  // Logging for debugging
   };
 
   useEffect(() => {
@@ -171,6 +159,8 @@ export const MainView = () => {
                   <Col className="mb-4" key={movies._id} md={3}>
                     <MovieCard 
                     movie={movies}
+                    addFavorite={addFavorite}
+                    deleteFavorite={deleteFavorite}
                      />
                   </Col>
                 ))}
