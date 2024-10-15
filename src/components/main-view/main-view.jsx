@@ -14,14 +14,18 @@ export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
 
-  const [user, setUser] = useState(storedUser ? storedUser : null);
+  const [user, setUser] = useState(storedUser ? storedUser : {favoriteMovies: [] });
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
+
+  const saveUserToLocalStorage = (updatedUser) => {
+    localStorage.setItem('user', JSON.stringify(updatedUser)); // Persist updated user to localStorage
+  };
 
   const addFavorite = (movieId) => {
     // Find the movie and update its favorite status
     const updatedMovies = movies.map((movie) => {
-      if (movie.id === movieId) {
+      if (movie._id === movieId) {
         return { ...movie, isFavorite: true };  // Add a flag for favorites or adjust logic as needed
       }
       return movie;
@@ -29,14 +33,23 @@ export const MainView = () => {
   
     // Update the movies state with the modified list
     setMovies(updatedMovies);
+
+    const updatedUser = {
+      ...user,
+      favoriteMovies: [...user.favoriteMovies, movieId]
+    };
+
+    setUser(updatedUser);
+    saveUserToLocalStorage(updatedUser);
   
     console.log('Updated Movies after Adding Favorite:', updatedMovies);  // Logging for debugging
+    console.log('Updated User after Adding Favorite:', updatedUser);
   };
   
   const deleteFavorite = (movieId) => {
     // Find the movie and update its favorite status
     const updatedMovies = movies.map((movie) => {
-      if (movie.id === movieId) {
+      if (movie._id === movieId) {
         return { ...movie, isFavorite: false };  // Remove the favorite flag or adjust logic as needed
       }
       return movie;
@@ -44,8 +57,17 @@ export const MainView = () => {
   
     // Update the movies state with the modified list
     setMovies(updatedMovies);
+
+    const updatedUser = {
+      ...user,
+      favoriteMovies: user.favoriteMovies.filter((id) => id !== movieId)
+    };
+
+    setUser(updatedUser);
+    saveUserToLocalStorage(updatedUser);
   
     console.log('Updated Movies after Removing Favorite:', updatedMovies);  // Logging for debugging
+    console.log('Updated User after Removing Favorite:', updatedUser);
   };
 
   useEffect(() => {
