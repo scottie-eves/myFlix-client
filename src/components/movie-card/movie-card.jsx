@@ -16,7 +16,7 @@ export const MovieCard = ({ movie, addFavorite, deleteFavorite, user }) => {
           <Card.Text>Directed by: {movie.director}</Card.Text>
           <Row>
           <Col>
-            <Link to={`/movies/${movie.id}`}>
+            <Link to={`/movies/${movie._id}`}>
               <Button 
               variant="info" 
               className="primary-button_custom me-2 mb-2">
@@ -28,14 +28,14 @@ export const MovieCard = ({ movie, addFavorite, deleteFavorite, user }) => {
               <Button
                 variant="danger"
                 className="unfavorite-button_custom me-2 mb-2"
-                onClick={() => deleteFavorite(movie.id)}
+                onClick={() => deleteFavorite(movie._id)}
               >
                 Unfavorite
               </Button>
               <Button
                 variant="danger"
                 className="favorite-button_custom me-2 mb-2"
-                onClick={() => addFavorite(movie.id)}
+                onClick={() => addFavorite(movie._id)}
               >
                 Favorite
               </Button>
@@ -46,12 +46,17 @@ export const MovieCard = ({ movie, addFavorite, deleteFavorite, user }) => {
     );
   };
 
-  MovieCard.PropTypes = {
+  MovieCard.propTypes = {
     movie: PropTypes.shape({
       _id: PropTypes.string.isRequired,
       Title: PropTypes.string.isRequired,
-      Director: PropTypes.string.isRequired
+      ImagePath: PropTypes.string.isRequired,
+      Director: PropTypes.shape({
+        Name: PropTypes.string.isRequired
     }).isRequired,
+  }).isRequired,
+  addFavorite: PropTypes.func.isRequired,
+  deleteFavorite: PropTypes.func.isRequired
   };
 
   export default MovieCard;
