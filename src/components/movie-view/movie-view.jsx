@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
 
-  if (!movies || movies.length === 0) {
+  if (!movies || movies.length === 0 || !movieId) {
     console.error("Movies array is undefined or empty");
     return <div>Loading movie details...</div>;
   }
