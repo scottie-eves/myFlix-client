@@ -128,9 +128,6 @@ export const MainView = () => {
                   <Col className="mb-4" key={movies._id} md={3}>
                     <MovieCard 
                     movie={movies}
-                    addFavorite={addFavorite}
-                    deleteFavorite={deleteFavorite}
-                    user={user}
                      />
                   </Col>
                 ))}
