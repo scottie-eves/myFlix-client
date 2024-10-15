@@ -54,9 +54,7 @@ export const MovieCard = ({ movie, addFavorite, deleteFavorite, user }) => {
       Director: PropTypes.shape({
         Name: PropTypes.string.isRequired
     }).isRequired,
-  }).isRequired,
-  addFavorite: PropTypes.func.isRequired,
-  deleteFavorite: PropTypes.func.isRequired
+  }).isRequired
   };
 
   export default MovieCard;
