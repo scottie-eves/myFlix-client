@@ -23,28 +23,40 @@ export const MainView = () => {
   };
 
   const addFavorite = (movieId) => {
-    // Find the movie and update its favorite status
-    const updatedMovies = movies.map((movie) => {
-      if (movie._id === movieId) {
-        return { ...movie, isFavorite: true };  // Add a flag for favorites or adjust logic as needed
+    // Make API call to add favorite
+    fetch(`https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
+      method: 'POST',
+      headers: { 
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
       }
-      return movie;
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to add movie to favorites');
+      }
+      return response.json();
+    })
+    .then((updatedUser) => {
+      const updatedMovies = movies.map((movie) => {
+        if (movie._id === movieId) {
+          return { ...movie, isFavorite: true };  // Update movie in local state
+        }
+        return movie;
+      });
+  
+      setMovies(updatedMovies);
+      setUser(updatedUser);  // Set the updated user received from the server
+      saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
+  
+      console.log('Updated Movies after Adding Favorite:', updatedMovies);
+      console.log('Updated User after Adding Favorite:', updatedUser);
+    })
+    .catch((error) => {
+      console.error('Error adding favorite movie:', error);
     });
-  
-    // Update the movies state with the modified list
-    setMovies(updatedMovies);
-
-    const updatedUser = {
-      ...user,
-      favoriteMovies: [...user.favoriteMovies, movieId]
-    };
-
-    setUser(updatedUser);
-    saveUserToLocalStorage(updatedUser);
-  
-    console.log('Updated Movies after Adding Favorite:', updatedMovies);  // Logging for debugging
-    console.log('Updated User after Adding Favorite:', updatedUser);
   };
+  
   
   const deleteFavorite = (movieId) => {
     // Find the movie and update its favorite status
