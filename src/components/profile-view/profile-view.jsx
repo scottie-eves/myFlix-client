@@ -7,9 +7,16 @@ import { MovieCard } from "../movie-card/movie-card";
 const ProfileView = ({ movies, token }) => {
   const [user, setUser] = useState({});
   const [isUserUpdated, setisUserUpdated] = useState(false);
-  const localUser = JSON.parse(localStorage.getItem("User"));
 
-  const favoriteMovies = movies ? movies.filter((movie) => localUser.FavoriteMovies.includes(movie.id)) : []; 
+  const storedUser = localStorage.getItem("User");
+  const localUser = storedUser ? JSON.parse(storedUser) : null;
+
+  if (!localUser) {
+    console.error("user data is not available in localStorage.");
+    return <div>Error: User data is missing. Please log in again.</div>;
+  }
+
+  const favoriteMovies = movies ? movies.filter((movie) => localUser.FavoriteMovies.includes(movie._id)) : []; 
 
   const [username, setUsername] = useState(user.username || "");
   const [email, setEmail] = useState(user.email || "");
@@ -23,6 +30,11 @@ const ProfileView = ({ movies, token }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!localUser || !localUser.Username) {
+      alert("user data is missing. Cannot update profile.");
+      return;
+    }
 
     fetch(
       `https://flix-vault-253ef352783e.herokuapp.com/users/${localUser.Username}`,
