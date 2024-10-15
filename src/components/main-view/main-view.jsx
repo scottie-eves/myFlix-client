@@ -61,7 +61,7 @@ export const MainView = () => {
       console.log(data);
       const moviesFromApi = data.map((doc) => {
         return {
-          id: doc._id,
+          _id: doc._id,
           title: doc.Title,
           image: doc.ImagePath,
           director: doc.Director?.Name || "Unknown",
