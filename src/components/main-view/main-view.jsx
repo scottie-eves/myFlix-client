@@ -14,7 +14,7 @@ export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
 
-  const [user, setUser] = useState(storedUser ? storedUser : {favoriteMovies: [] });
+  const [user, setUser] = useState(storedUser ? {...storedUser, favoriteMovies: storedUser.favoriteMovies || [] } : { favoriteMovies: [] });
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
 
