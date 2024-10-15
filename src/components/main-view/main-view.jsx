@@ -59,28 +59,40 @@ export const MainView = () => {
   
   
   const deleteFavorite = (movieId) => {
-    // Find the movie and update its favorite status
-    const updatedMovies = movies.map((movie) => {
-      if (movie._id === movieId) {
-        return { ...movie, isFavorite: false };  // Remove the favorite flag or adjust logic as needed
+    // Make API call to remove favorite
+    fetch(`https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: { 
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
       }
-      return movie;
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to remove movie from favorites');
+      }
+      return response.json();
+    })
+    .then((updatedUser) => {
+      const updatedMovies = movies.map((movie) => {
+        if (movie._id === movieId) {
+          return { ...movie, isFavorite: false };  // Update movie in local state
+        }
+        return movie;
+      });
+  
+      setMovies(updatedMovies);
+      setUser(updatedUser);  // Set the updated user received from the server
+      saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
+  
+      console.log('Updated Movies after Removing Favorite:', updatedMovies);
+      console.log('Updated User after Removing Favorite:', updatedUser);
+    })
+    .catch((error) => {
+      console.error('Error removing favorite movie:', error);
     });
-  
-    // Update the movies state with the modified list
-    setMovies(updatedMovies);
-
-    const updatedUser = {
-      ...user,
-      favoriteMovies: user.favoriteMovies.filter((id) => id !== movieId)
-    };
-
-    setUser(updatedUser);
-    saveUserToLocalStorage(updatedUser);
-  
-    console.log('Updated Movies after Removing Favorite:', updatedMovies);  // Logging for debugging
-    console.log('Updated User after Removing Favorite:', updatedUser);
   };
+  
 
   useEffect(() => {
     if (!token) {
