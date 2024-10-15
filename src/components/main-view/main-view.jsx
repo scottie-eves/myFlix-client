@@ -18,48 +18,6 @@ export const MainView = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
 
-  const addFavorite = (movieId) => {
-    const updatedFavorites = [...user.FavoriteMovies, movieId];
-
-    fetch(`https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        FavoriteMovies: updatedFavorites,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUser(data);
-        localStorage.setItem("user", JSON.stringify(data));  // Update the user in localStorage
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const deleteFavorite = (movieId) => {
-    const updatedFavorites = user.FavoriteMovies.filter((id) => id !== movieId);
-
-    fetch(`https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        FavoriteMovies: updatedFavorites,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUser(data);
-        localStorage.setItem("user", JSON.stringify(data));  // Update the user in localStorage
-      })
-      .catch((error) => console.log(error));
-  };
-
   useEffect(() => {
     if (!token) {
       return;
