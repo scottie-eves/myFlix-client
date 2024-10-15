@@ -106,10 +106,10 @@ export const MainView = () => {
         element={
           <>
           {user ? (
-            <ProfileView onLoggedIn={(user) => setUser(user)} />
+            <ProfileView user={user} token={token} />
           ) : (
             <Col md={5}>
-              <Navigate to="/login" />
+              <Navigate to="/login" replace />
             </Col>
           )}
           </>

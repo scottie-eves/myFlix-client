@@ -4,112 +4,141 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { MovieCard } from "../movie-card/movie-card";
 
-const ProfileView = ({ movies, token }) => {
-  const [user, setUser] = useState({});
-  const [isUserUpdated, setisUserUpdated] = useState(false);
-
-  const storedUser = localStorage.getItem("User");
-  const localUser = storedUser ? JSON.parse(storedUser) : null;
-
-  if (!localUser) {
-    console.error("user data is not available in localStorage.");
-    return <div>Error: User data is missing. Please log in again.</div>;
-  }
-
-  const favoriteMovies = movies ? movies.filter((movie) => localUser.FavoriteMovies.includes(movie._id)) : []; 
-
-  const [username, setUsername] = useState(user.username || "");
-  const [email, setEmail] = useState(user.email || "");
-  const [password, setPassword] = useState("");
-
-  const formData = {
-    Username: username,
-    Password: password,
-    Email: email
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (!localUser || !localUser.Username) {
-      alert("user data is missing. Cannot update profile.");
-      return;
-    }
-
-    fetch(
-      `https://flix-vault-253ef352783e.herokuapp.com/users/${localUser.Username}`,
-      {
-        method: 'PUT',
-        body: JSON.stringify(formData),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      }
-    ).then((response) => {
-      if (response.ok) {
-        onLoggedIn(username);
-      } else {
-        alert("Failed");
-      }
-    });
-  };
+const ProfileView = ({ user, token }) => {
+  const [profileUser, setProfileUser] = useState(user || {});
+  const [isUserUpdated, setIsUserUpdated] = useState(false);
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  const storedUser = user || localUser;  // Fallback to localStorage user if not passed as prop
+  const authToken = token || localStorage.getItem("token");
 
   useEffect(() => {
     const getProfileData = async () => {
+      if (!storedUser || !authToken) return;  // If user/token is missing, don't make the API call
+
       try {
         const { data } = await axios.get(
-          `https://flix-vault-253ef352783e.herokuapp.com/users/${localUser.Username}`,
+          `https://flix-vault-253ef352783e.herokuapp.com/users/${storedUser.Username}`,
           {
             headers: {
-              Authorization: `bearer ${token}`,
+              Authorization: `Bearer ${authToken}`,
             },
           }
         );
-        setUser(data);
-        setisUserUpdated(false);
+        setProfileUser(data);
+        setIsUserUpdated(false);
       } catch (error) {
         console.log({ error });
       }
     };
     getProfileData();
-  }, [token, isUserUpdated]);
+  }, [authToken, isUserUpdated]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = {
+      Username: profileUser.Username,  // Using state to handle form data
+      Password: profileUser.Password,
+      Email: profileUser.Email,
+    };
+
+    fetch(
+      `https://flix-vault-253ef352783e.herokuapp.com/users/${storedUser.Username}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    ).then((response) => {
+      if (response.ok) {
+        alert("Profile updated successfully!");
+        setIsUserUpdated(true);  // Trigger useEffect to refresh data
+      } else {
+        alert("Profile update failed.");
+      }
+    });
+  };
+
+  const favoriteMovies = profileUser.FavoriteMovies || [];  // Safeguard in case favoriteMovies is undefined
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId="userProfile">
-        <Form.Label>Update Profile</Form.Label>
-        <Form.Control type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      <h2>Profile</h2>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username</Form.Label>
+        <Form.Control
+          type="text"
+          value={profileUser.Username || ""}
+          onChange={(e) =>
+            setProfileUser({ ...profileUser, Username: e.target.value })
+          }
+          required
+        />
       </Form.Group>
-      <Form.Group>
-        <Form.Label>Email:</Form.Label>
-        <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+
+      <Form.Group controlId="formEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="email"
+          value={profileUser.Email || ""}
+          onChange={(e) =>
+            setProfileUser({ ...profileUser, Email: e.target.value })
+          }
+          required
+        />
       </Form.Group>
-      <Form.Group>
-        <Form.Label>Birthday:</Form.Label>
-        <Form.Control type="date" value={user.birthday} />
+
+      <Form.Group controlId="formBirthday">
+        <Form.Label>Birthday</Form.Label>
+        <Form.Control
+          type="date"
+          value={profileUser.Birthday || ""}
+          onChange={(e) =>
+            setProfileUser({ ...profileUser, Birthday: e.target.value })
+          }
+        />
       </Form.Group>
-      <Button type="submit">Update</Button>
-      <Form.Group>
-        <Form.Label>Favorite Movies</Form.Label>
-        <div className="favorite-movies">
-          {favoriteMovies.map((movie) => (
-            <MovieCard key={movie._id} movie={movie} user={user} />
-          ))}
-        </div>
-      </Form.Group>
-      <Button onClick={() => handleDeregister(user._id)}>Deregister</Button>
+
+      <Button variant="primary" type="submit">
+        Update Profile
+      </Button>
+
+      <h3>Your Favorite Movies</h3>
+      <div className="favorite-movies">
+        {favoriteMovies.length > 0 ? (
+          favoriteMovies.map((movieId) => (
+            <MovieCard key={movieId} movie={movieId} />
+          ))
+        ) : (
+          <p>You have no favorite movies.</p>
+        )}
+      </div>
+
+      <Button variant="danger" onClick={() => handleDeregister(profileUser._id)}>
+        Deregister
+      </Button>
     </Form>
   );
 
-  // Handle deregister
   async function handleDeregister(userId) {
     try {
-      await axios.delete(`/users/${userId}`);
-      alert("Deregister successful");
-      window.location.reload();
+      await axios.delete(
+        `https://flix-vault-253ef352783e.herokuapp.com/users/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      alert("Account successfully deleted.");
+      localStorage.clear(); // Clear localStorage after deletion
+      window.location.reload(); // Reload the page
     } catch (err) {
       console.error(err);
+      alert("De-registration failed.");
     }
   }
 };
