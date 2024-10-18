@@ -109,12 +109,8 @@ const ProfileView = ({ user, token }) => {
       <h3>Your Favorite Movies</h3>
       <div className="favorite-movies">
         {favoriteMovies.length > 0 ? (
-          favoriteMovies.map((movies) => (
-            <MovieCard 
-                    movie={movies}
-                    addFavorite={addFavorite}
-                    deleteFavorite={deleteFavorite}
-                     />
+          favoriteMovies.map((movieId) => (
+            <MovieCard key={movieId} movie={movieId} />
           ))
         ) : (
           <p>You have no favorite movies.</p>
