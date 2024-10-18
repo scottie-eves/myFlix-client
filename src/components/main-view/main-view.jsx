@@ -181,7 +181,12 @@ export const MainView = () => {
         element={
           <>
           {user ? (
-            <ProfileView user={user} token={token} />
+            <ProfileView 
+            user={user} 
+            token={token}
+            addFavorite={addFavorite}
+            deleteFavorite={deleteFavorite}
+             />
           ) : (
             <Col md={5}>
               <Navigate to="/login" replace />

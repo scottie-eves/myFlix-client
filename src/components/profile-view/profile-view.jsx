@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { MovieCard } from "../movie-card/movie-card";
 
-const ProfileView = ({ user, token }) => {
+const ProfileView = ({ user, token, addFavorite, deleteFavorite }) => {
   const [profileUser, setProfileUser] = useState(user || {});
   const [isUserUpdated, setIsUserUpdated] = useState(false);
   const localUser = JSON.parse(localStorage.getItem("user"));
@@ -64,6 +64,10 @@ const ProfileView = ({ user, token }) => {
 
   const favoriteMovies = profileUser.FavoriteMovies || [];  // Safeguard in case favoriteMovies is undefined
 
+  const favoriteMovieObjects = favoriteMovies.map((movieId) => 
+  movies.find((movie) => movie._id === movieId)
+);
+
   return (
     <Form onSubmit={handleSubmit}>
       <h2>Profile</h2>
@@ -107,15 +111,23 @@ const ProfileView = ({ user, token }) => {
       </Button>
 
       <h3>Your Favorite Movies</h3>
-      <div className="favorite-movies">
-        {favoriteMovies.length > 0 ? (
-          favoriteMovies.map((movieId) => (
-            <MovieCard key={movieId} movie={movieId} />
+      <Row className="favorite-movies">
+        {favoriteMovieObjects.length > 0 ? (
+          favoriteMovieObjects.map((movie) => (
+            movie && (
+              <Col key={movie._id} md={3}>
+            <MovieCard
+            movie={movie}
+            addFavorite={addFavorite}
+            deleteFavorite={deleteFavorite}
+             />
+             </Col>
+            )
           ))
         ) : (
           <p>You have no favorite movies.</p>
         )}
-      </div>
+      </Row>
 
       <Button variant="danger" onClick={() => handleDeregister(profileUser._id)}>
         Deregister
