@@ -184,6 +184,7 @@ export const MainView = () => {
             <ProfileView 
             user={user} 
             token={token}
+            movies={movies}
             addFavorite={addFavorite}
             deleteFavorite={deleteFavorite}
              />
