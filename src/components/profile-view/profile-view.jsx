@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import { MovieCard } from "../movie-card/movie-card";
 
 const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
