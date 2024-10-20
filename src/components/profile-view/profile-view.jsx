@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { MovieCard } from "../movie-card/movie-card";
 
-const ProfileView = ({ user, token, addFavorite, deleteFavorite }) => {
+const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
   const [profileUser, setProfileUser] = useState(user || {});
   const [isUserUpdated, setIsUserUpdated] = useState(false);
   const localUser = JSON.parse(localStorage.getItem("user"));
