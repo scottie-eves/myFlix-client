@@ -84,7 +84,10 @@ export const MainView = () => {
         }
         return movie;
       });
+
+      const updatedFavoriteMovies = profileUser.favoriteMovies.filter(id => id !== movieId);
   
+      setProfileUser({ ...profileUser, favoriteMovies: updatedFavoriteMovies });
       setMovies(updatedMovies);
       setUser(updatedUser);  // Set the updated user received from the server
       saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
@@ -215,7 +218,7 @@ export const MainView = () => {
                     <MovieCard 
                     movie={movies}
                     addFavorite={addFavorite}
-                    deleteFavorite={deleteFavorite}
+                    deleteFavorite={() => deleteFavorite(movies._id)}
                      />
                   </Col>
                 ))}
