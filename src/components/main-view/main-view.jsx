@@ -23,6 +23,10 @@ export const MainView = () => {
   };
 
   const addFavorite = (movieId) => {
+
+    if (user.favoriteMovies.includes(movieId)) {
+      return;
+    }
     // Make API call to add favorite
     fetch(`https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
       method: 'POST',
