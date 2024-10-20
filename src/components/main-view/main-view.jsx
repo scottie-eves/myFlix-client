@@ -24,7 +24,12 @@ export const MainView = () => {
 
   const addFavorite = (movieId) => {
 
+    if (!user.favoriteMovies) {
+      user.favoriteMovies = [];
+    }
+
     if (user.favoriteMovies.includes(movieId)) {
+      console.log('Movie is already in favorites');
       return;
     }
     // Make API call to add favorite
@@ -64,8 +69,8 @@ export const MainView = () => {
   
   const deleteFavorite = (movieId) => {
 
-    if (!user || !token) {
-      console.error("User or token is not available.");
+    if (!user.favoriteMovies.includes(movieId)) {
+      console.log('Movie is not in favorites');
       return;
     }
 
@@ -86,9 +91,11 @@ export const MainView = () => {
     .then((updatedUser) => {
 
       const updatedFavoriteMovies = user.favoriteMovies.filter(_id => _id !== movieId);
-
-      setUser({ ...user, favoriteMovies: updatedFavoriteMovies });
-      saveUserToLocalStorage({ ...user, favoriteMovies: updatedFavoriteMovies });
+     
+      setProfileUser({ ...profileUser, favoriteMovies: updatedFavoriteMovies });
+      setMovies(updatedMovies);
+      setUser(updatedUser);  // Set the updated user received from the server
+      saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
 
       const updatedMovies = movies.map((movie) => {
         if (movie._id === movieId) {
@@ -98,11 +105,6 @@ export const MainView = () => {
       });
 
       setMovies(updatedMovies);
-  
-      // setProfileUser({ ...profileUser, favoriteMovies: updatedFavoriteMovies });
-      // setMovies(updatedMovies);
-      // setUser(updatedUser);  // Set the updated user received from the server
-      // saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
   
       console.log('Updated Movies after Removing Favorite:', updatedMovies);
       console.log('Updated User after Removing Favorite:', updatedUser);
