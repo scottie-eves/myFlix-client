@@ -63,6 +63,12 @@ export const MainView = () => {
   
   
   const deleteFavorite = (movieId) => {
+
+    if (!user || !token) {
+      console.error("User or token is not available.");
+      return;
+    }
+
     // Make API call to remove favorite
     fetch(`https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
       method: 'DELETE',
@@ -78,6 +84,12 @@ export const MainView = () => {
       return response.json();
     })
     .then((updatedUser) => {
+
+      const updatedFavoriteMovies = user.favoriteMovies.filter(_id => _id !== movieId);
+
+      setUser({ ...user, favoriteMovies: updatedFavoriteMovies });
+      saveUserToLocalStorage({ ...user, favoriteMovies: updatedFavoriteMovies });
+
       const updatedMovies = movies.map((movie) => {
         if (movie._id === movieId) {
           return { ...movie, isFavorite: false };  // Update movie in local state
@@ -85,12 +97,12 @@ export const MainView = () => {
         return movie;
       });
 
-      const updatedFavoriteMovies = profileUser.favoriteMovies.filter(id => id !== movieId);
-  
-      setProfileUser({ ...profileUser, favoriteMovies: updatedFavoriteMovies });
       setMovies(updatedMovies);
-      setUser(updatedUser);  // Set the updated user received from the server
-      saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
+  
+      // setProfileUser({ ...profileUser, favoriteMovies: updatedFavoriteMovies });
+      // setMovies(updatedMovies);
+      // setUser(updatedUser);  // Set the updated user received from the server
+      // saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
   
       console.log('Updated Movies after Removing Favorite:', updatedMovies);
       console.log('Updated User after Removing Favorite:', updatedUser);
@@ -217,7 +229,8 @@ export const MainView = () => {
                   <Col className="mb-4" key={movies._id} md={3}>
                     <MovieCard 
                     movie={movies}
-                    addFavorite={addFavorite}
+                    user={user}
+                    addFavorite={() => addFavorite(movies._id)}
                     deleteFavorite={() => deleteFavorite(movies._id)}
                      />
                   </Col>
