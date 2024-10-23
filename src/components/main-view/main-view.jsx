@@ -90,10 +90,13 @@ export const MainView = () => {
     })
     .then((updatedUser) => {
 
-      const updatedFavoriteMovies = user.favoriteMovies.filter(_id => _id !== movieId);
+      const updatedFavoriteMovies = updatedUser.favoriteMovies;
      
-      setProfileUser({ ...profileUser, favoriteMovies: updatedFavoriteMovies });
-      setMovies(updatedMovies);
+      setProfileUser((prevProfileUser) => ({
+        ...prevProfileUser,
+        favoriteMovies: updatedFavoriteMovies
+      }));
+
       setUser(updatedUser);  // Set the updated user received from the server
       saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
 
@@ -105,9 +108,7 @@ export const MainView = () => {
       });
 
       setMovies(updatedMovies);
-  
-      console.log('Updated Movies after Removing Favorite:', updatedMovies);
-      console.log('Updated User after Removing Favorite:', updatedUser);
+      console.log('Movie removed from favorites.');
     })
     .catch((error) => {
       console.error('Error removing favorite movie:', error);
