@@ -64,11 +64,12 @@ const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
     });
   };
 
-  const favoriteMovies = profileUser.FavoriteMovies || [];  // Safeguard in case favoriteMovies is undefined
+  // Safeguard to ensure no duplicates
+  const favoriteMovies = Array.from(new Set(profileUser.favoriteMovies || []));
 
   const favoriteMovieObjects = favoriteMovies.map((movieId) => 
   movies.find((movie) => movie._id === movieId)
-);
+).filter(movie => movie);
 
   return (
     <Form onSubmit={handleSubmit}>
