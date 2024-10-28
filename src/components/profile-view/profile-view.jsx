@@ -151,8 +151,9 @@ console.log("User ID for De-registration:", profileUser._id);
   );
 
   async function handleDeregister(userId) {
+    console.log('User ID for de-registration before API call:', userId);
     try {
-      await axios.delete(
+      const response = await axios.delete(
         `https://flix-vault-253ef352783e.herokuapp.com/users/${userId}`,
         {
           headers: {
@@ -160,6 +161,7 @@ console.log("User ID for De-registration:", profileUser._id);
           },
         }
       );
+      console.log('Delete response:', response);
       alert("Account successfully deleted.");
       localStorage.clear(); // Clear localStorage after deletion
       window.location.reload(); // Reload the page
