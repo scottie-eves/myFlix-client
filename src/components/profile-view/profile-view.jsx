@@ -64,6 +64,11 @@ const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
     });
   };
 
+  console.log("user:", user);
+console.log("storedUser:", storedUser);
+console.log("profileUser:", profileUser);
+
+
   // Safeguard to handle undefined favoriteMovies
   const favoriteMovies = profileUser?.favoriteMovies ?? [];
 
