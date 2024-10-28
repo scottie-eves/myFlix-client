@@ -138,7 +138,7 @@ console.log("profileUser:", profileUser);
         )}
       </Row>
 
-      <Button variant="danger" onClick={() => handleDeregister(profileUser.id)}>
+      <Button variant="danger" onClick={() => handleDeregister(profileUser._id)}>
         Deregister
       </Button>
     </Form>
