@@ -68,7 +68,7 @@ console.log("user:", user);
 console.log("storedUser:", storedUser);
 console.log("profileUser:", profileUser);
 console.log(`Deleting user at: https://flix-vault-253ef352783e.herokuapp.com/users/${user}`);
-console.log("User ID for De-registration:", profileUser._id);
+console.log("User ID for De-registration:", profileUser.Username);
 console.log('Auth-token:', authToken);
 
 
@@ -142,19 +142,19 @@ console.log('Auth-token:', authToken);
       </Row>
 
       <Button variant="danger" onClick={() => {
-        console.log('Attempting to deregister user with ID:' , profileUser._id);
-        handleDeregister(profileUser._id)
+        console.log('Attempting to deregister user with ID:' , profileUser.Username);
+        handleDeregister(profileUser.Username)
         }}>
         Deregister
       </Button>
     </Form>
   );
 
-  async function handleDeregister(userId) {
-    console.log('User ID for de-registration before API call:', userId);
+  async function handleDeregister(Username) {
+    console.log('User ID for de-registration before API call:', Username);
     try {
       const response = await axios.delete(
-        `https://flix-vault-253ef352783e.herokuapp.com/users/${userId}`,
+        `https://flix-vault-253ef352783e.herokuapp.com/users/${Username}`,
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
