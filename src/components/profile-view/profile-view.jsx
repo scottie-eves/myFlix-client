@@ -67,6 +67,8 @@ const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
   console.log("user:", user);
 console.log("storedUser:", storedUser);
 console.log("profileUser:", profileUser);
+console.log(`Deleting user at: https://flix-vault-253ef352783e.herokuapp.com/users/${userId}`);
+
 
 
   // Safeguard to handle undefined favoriteMovies
