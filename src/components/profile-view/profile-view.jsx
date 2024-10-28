@@ -73,7 +73,7 @@ console.log('Auth-token:', authToken);
 
 
   // Safeguard to handle undefined favoriteMovies
-  const favoriteMovies = profileUser?.favoriteMovies ?? [];
+  const favoriteMovies = profileUser?.FavoriteMovies ?? [];
 
   // Map favorite movie IDs to movie objects in the global movies array
   const favoriteMovieObjects = favoriteMovies
