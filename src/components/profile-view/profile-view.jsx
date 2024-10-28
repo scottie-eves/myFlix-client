@@ -64,12 +64,13 @@ const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
     });
   };
 
-  // Safeguard to ensure no duplicates
-  const favoriteMovies = Array.from(new Set(profileUser.favoriteMovies || []));
+  // Safeguard to handle undefined favoriteMovies
+  const favoriteMovies = profileUser?.favoriteMovies ?? [];
 
-  const favoriteMovieObjects = favoriteMovies.map((movieId) => 
-  movies.find((movie) => movie._id === movieId)
-).filter(movie => movie);
+  // Map favorite movie IDs to movie objects in the global movies array
+  const favoriteMovieObjects = favoriteMovies
+    .map((movieId) => movies.find((movie) => movie._id === movieId))
+    .filter(Boolean); // Filter out undefined movies
 
   return (
     <Form onSubmit={handleSubmit}>

@@ -10,7 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-export const MainView = () => {
+export const MainView = ({ movies, user, token, addFavorite, deleteFavorite }) => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
 
@@ -219,29 +219,34 @@ export const MainView = () => {
         }
         />
         <Route
-        path="/"
-          element={
-            <>
-              {!user ? (
-                <Navigate to="/login" replace />
-              ) : movies.length === 0 ? (
-                <Col>No movies!</Col>
-              ) : (
-                <>
-                {movies.map((movies) => (
-                  <Col className="mb-4" key={movies._id} md={3}>
-                    <MovieCard 
-                    movie={movies}
-                    user={user}
-                    addFavorite={() => addFavorite(movies._id)}
-                    deleteFavorite={() => deleteFavorite(movies._id)}
-                     />
-                  </Col>
-                ))}
-                </>
-              )}
-            </>
-        }
+          path="/"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>No movies!</Col>
+                ) : (
+                  <>
+                    {movies.map((movie) => {
+                      const isFavorite = user?.favoriteMovies?.includes(movie._id) || false;
+
+                      return (
+                        <Col className="mb-4" key={movie._id} md={3}>
+                          <MovieCard movie={movie} user={user} />
+                          {/* Conditionally render favorite/unfavorite buttons */}
+                          {isFavorite ? (
+                            <button onClick={() => deleteFavorite(movie._id)}>Unfavorite</button>
+                          ) : (
+                            <button onClick={() => addFavorite(movie._id)}>Favorite</button>
+                          )}
+                        </Col>
+                      );
+                    })}
+                  </>
+                )}
+              </>
+            }
         />
         </Routes>
         </Row>
