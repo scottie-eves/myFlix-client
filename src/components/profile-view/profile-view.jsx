@@ -69,7 +69,7 @@ console.log("storedUser:", storedUser);
 console.log("profileUser:", profileUser);
 console.log(`Deleting user at: https://flix-vault-253ef352783e.herokuapp.com/users/${user}`);
 console.log("User ID for De-registration:", profileUser._id);
-
+console.log('Auth-token:', authToken);
 
 
   // Safeguard to handle undefined favoriteMovies
