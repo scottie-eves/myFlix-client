@@ -56,10 +56,9 @@ export const MainView = () => {
   
       setMovies(updatedMovies);
       setUser(updatedUser);  // Set the updated user received from the server
+      console.log('Updated user:', user);
+      console.log('Updated movies:', movies);
       saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
-  
-      console.log('Updated Movies after Adding Favorite:', updatedMovies);
-      console.log('Updated User after Adding Favorite:', updatedUser);
     })
     .catch((error) => {
       console.error('Error adding favorite movie:', error);
@@ -95,6 +94,8 @@ export const MainView = () => {
       setProfileUser({ ...profileUser, favoriteMovies: updatedFavoriteMovies });
       setMovies(updatedMovies);
       setUser(updatedUser);  // Set the updated user received from the server
+      console.log('Updated user:', user);
+      console.log('Updated movies:', movies);
       saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
 
       const updatedMovies = movies.map((movie) => {
