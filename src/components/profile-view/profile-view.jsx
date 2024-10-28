@@ -64,10 +64,11 @@ const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
     });
   };
 
-  console.log("user:", user);
+console.log("user:", user);
 console.log("storedUser:", storedUser);
 console.log("profileUser:", profileUser);
 console.log(`Deleting user at: https://flix-vault-253ef352783e.herokuapp.com/users/${user}`);
+console.log("User ID for De-registration:", profileUser._id);
 
 
 
@@ -140,7 +141,10 @@ console.log(`Deleting user at: https://flix-vault-253ef352783e.herokuapp.com/use
         )}
       </Row>
 
-      <Button variant="danger" onClick={() => handleDeregister(profileUser._id)}>
+      <Button variant="danger" onClick={() => {
+        console.log('Attempting to deregister user with ID:' , profileUser._id);
+        handleDeregister(profileUser._id)
+        }}>
         Deregister
       </Button>
     </Form>
