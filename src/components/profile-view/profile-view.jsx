@@ -26,14 +26,14 @@ const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
             },
           }
         );
-        setProfileUser(data);
+        setProfileUser(user);
         setIsUserUpdated(false);
       } catch (error) {
         console.log({ error });
       }
     };
     getProfileData();
-  }, [authToken, isUserUpdated]);
+  }, [authToken, isUserUpdated, user]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -116,7 +116,7 @@ const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
 
       <h3>Your Favorite Movies</h3>
       <Row className="favorite-movies">
-        {favoriteMovieObjects.length > 0 ? (
+        {movies.length > 0 && favoriteMovieObjects.length > 0 ? (
           favoriteMovieObjects.map((movie) => (
             movie && (
               <Col key={movie._id} md={3}>
