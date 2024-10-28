@@ -66,50 +66,47 @@ export const MainView = () => {
   };
   
   
-  const deleteFavorite = (movieId) => {
-
+  const deleteFavorite = async (movieId) => {
     if (!user.favoriteMovies.includes(movieId)) {
       console.log('Movie is not in favorites');
       return;
     }
-
-    // Make API call to remove favorite
-    fetch(`https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
-      method: 'DELETE',
-      headers: { 
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
+  
+    try {
+      // Make API call to remove favorite
+      const response = await fetch(`https://flix-vault-253ef352783e.herokuapp.com/users/${user.Username}/movies/${movieId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+  
       if (!response.ok) {
         throw new Error('Failed to remove movie from favorites');
       }
-      return response.json();
-    })
-    .then((updatedUser) => {
-
-      const updatedFavoriteMovies = updatedUser.favoriteMovies;
-     
-      setProfileUser({ ...profileUser, favoriteMovies: updatedFavoriteMovies });
+  
+      const updatedUser = await response.json();
+  
+      // Update state with the returned updated user data
+      setUser(updatedUser);
+      setProfileUser(updatedUser); // Ensure ProfileView reflects the update
+      saveUserToLocalStorage(updatedUser);
+  
+      // Update movie's favorite status in local movie list
+      const updatedMovies = movies.map((movie) => 
+        movie._id === movieId ? { ...movie, isFavorite: false } : movie
+      );
+  
       setMovies(updatedMovies);
-      setUser(updatedUser);  // Set the updated user received from the server
-      console.log('Updated user:', user);
-      console.log('Updated movies:', movies);
-      saveUserToLocalStorage(updatedUser);  // Save updated user to localStorage
-
-      const updatedMovies = movies.map((movie) => {
-        if (movie._id === movieId) {
-          return { ...movie, isFavorite: false };  // Update movie in local state
-        }
-        return movie;
-      });
-
-      setMovies(updatedMovies);
-    })
-    .catch((error) => {
+  
+      console.log('Updated user:', updatedUser);
+      console.log('Updated movies:', updatedMovies);
+  
+    } catch (error) {
       console.error('Error removing favorite movie:', error);
-    });
+      alert('Failed to remove favorite movie.');
+    }
   };
   
 
