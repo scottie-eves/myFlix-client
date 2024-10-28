@@ -67,11 +67,11 @@ const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
 // console.log('Auth-token:', authToken);
 
 
-  // Safeguard to handle undefined favoriteMovies
-  const favoriteMovies = profileUser?.FavoriteMovies ?? [];
+  // Safeguard to handle undefined FavoriteMovies
+  const FavoriteMovies = profileUser?.FavoriteMovies ?? [];
 
   // Map favorite movie IDs to movie objects in the global movies array
-  const favoriteMovieObjects = favoriteMovies
+  const favoriteMovieObjects = FavoriteMovies
     .map((movieId) => movies.find((movie) => movie._id === movieId))
     .filter(Boolean); // Filter out undefined movies
 

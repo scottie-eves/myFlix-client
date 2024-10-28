@@ -14,7 +14,7 @@ export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
 
-  const [user, setUser] = useState(storedUser ? {...storedUser, favoriteMovies: storedUser.favoriteMovies || [] } : { favoriteMovies: [] });
+  const [user, setUser] = useState(storedUser ? {...storedUser, FavoriteMovies: storedUser.FavoriteMovies || [] } : { FavoriteMovies: [] });
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
 
@@ -24,11 +24,11 @@ export const MainView = () => {
 
   const addFavorite = (movieId) => {
 
-    if (!user.favoriteMovies) {
-      user.favoriteMovies = [];
+    if (!user.FavoriteMovies) {
+      user.FavoriteMovies = [];
     }
 
-    if (user.favoriteMovies.includes(movieId)) {
+    if (user.FavoriteMovies.includes(movieId)) {
       console.log('Movie is already in favorites');
       return;
     }
@@ -67,7 +67,7 @@ export const MainView = () => {
   
   
   const deleteFavorite = async (movieId) => {
-    if (!user.favoriteMovies.includes(movieId)) {
+    if (!user.FavoriteMovies.includes(movieId)) {
       console.log('Movie is not in favorites');
       return;
     }
