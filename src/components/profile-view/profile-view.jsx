@@ -133,7 +133,7 @@ const ProfileView = ({ user, token, movies, addFavorite, deleteFavorite }) => {
         )}
       </Row>
 
-      <Button variant="danger" onClick={() => handleDeregister(profileUser._id)}>
+      <Button variant="danger" onClick={() => handleDeregister(profileUser.id)}>
         Deregister
       </Button>
     </Form>

@@ -138,8 +138,6 @@ export const MainView = () => {
     });
   }, [token]);
 
-  console.log(movies);
-
   console.log("user" , user);
 
   return (
