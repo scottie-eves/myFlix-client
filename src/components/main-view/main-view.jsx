@@ -155,6 +155,7 @@ export const MainView = () => {
     }}
     onSearch={handleSearch}
     />
+    <div className="main-content">
     <Row className="justify-content-md-center">
       <Routes>
         <Route
@@ -246,6 +247,7 @@ export const MainView = () => {
         />
         </Routes>
         </Row>
+        </div>
         </BrowserRouter>
   );
 };
