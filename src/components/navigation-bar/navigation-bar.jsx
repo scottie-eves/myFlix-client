@@ -42,6 +42,10 @@ export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
               className="me-2"
               aria-label="Search"
               onChange={(e) => onSearch(e.target.value)} // Pass search input to onSearch
+              style={{
+                backgroundColor: "#f9f9f9", // Match the main content background
+                color: "#333", // Dark text for contrast
+              }}
             />
           </Form>
         </Navbar.Collapse>
