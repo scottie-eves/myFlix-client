@@ -1,7 +1,11 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Form, FormControl } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
+  const handleSearch = (event) => {
+    onSearch(event.target.value);  // Pass search input back to MainView
+  };
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -27,14 +31,24 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                   Home
                 </Nav.Link>
                 <Nav.Link as={Link} to="/profile">
-                Profile
+                  Profile
                 </Nav.Link>
                 <Nav.Link onClick={onLoggedOut}>
-                Logout
+                  Logout
                 </Nav.Link>
               </>
             )}
           </Nav>
+          {user && (
+            <Form className="d-flex">
+              <FormControl
+                type="search"
+                placeholder="Search movies"
+                className="mr-sm-2"
+                onChange={handleSearch}  // Trigger search on typing
+              />
+            </Form>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
