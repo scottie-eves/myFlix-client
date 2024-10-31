@@ -3,46 +3,53 @@ $body-bg: Steelblue;
 
 @import "~bootstrap/scss/bootstrap.scss";
 
-  body {
-    background-color: #f0f0f0; // A light gray background for the body
-    color: #333; // Darker text color for better contrast
-    font-family: 'Arial', sans-serif; // Smooth typography
-  }
-  
-  .navbar {
-    background-color: #282c34; // Dark background for the navbar
-    color: #fff; // White text color for better visibility
-  
-    .navbar-brand,
-    .nav-link {
-      color: #fff; // White text for brand and links
-      &:hover {
-        color: #61dafb; // Light blue color on hover for links
-      }
+body {
+  background-color: #f0f0f0; // A light gray background for the body
+  color: #333; // Darker text color for better contrast
+  font-family: 'Arial', sans-serif; // Smooth typography
+}
+
+.navbar {
+  background-color: #282c34; // Dark background for the navbar
+
+  .navbar-brand,
+  .nav-link {
+    color: #ffffff; // White text for brand and links
+    &:hover {
+      color: #61dafb; // Light blue color on hover for links
     }
   }
-  
-  .main-content {
-    padding: 20px; // Space between navbar and content
-    background-color: #ffffff; // White background for main content
-    border-radius: 5px; // Slightly rounded corners
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+
+  // Ensure that dropdown items and other links also have white text
+  .dropdown-item {
+    color: #ffffff; // White color for dropdown items
+    &:hover {
+      background-color: #61dafb; // Light blue background on hover for dropdown
+      color: #282c34; // Dark text on hover
+    }
   }
-  
-  input[type="text"], 
-  input[type="email"], 
-  input[type="date"], 
-  textarea {
-    background-color: #f9f9f9; // Light background for input fields
-    color: #333; // Dark text for input fields
-    border: 1px solid #ccc; // Light border for input fields
-  }
-  
-  input[type="text"]:focus, 
-  input[type="email"]:focus, 
-  input[type="date"]:focus, 
-  textarea:focus {
-    border-color: #61dafb; // Change border color on focus
-    outline: none; // Remove default outline
-  }
-  
+}
+
+.main-content {
+  padding: 20px; // Space between navbar and content
+  background-color: #ffffff; // White background for main content
+  border-radius: 5px; // Slightly rounded corners
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="date"], 
+textarea {
+  background-color: #f9f9f9; // Light background for input fields
+  color: #333; // Dark text for input fields
+  border: 1px solid #ccc; // Light border for input fields
+}
+
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="date"]:focus, 
+textarea:focus {
+  border-color: #61dafb; // Change border color on focus
+  outline: none; // Remove default outline
+}
