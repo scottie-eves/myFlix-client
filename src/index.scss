@@ -1,39 +1,52 @@
-$primary: SeaGreen;
-$body-bg: Steelblue;
+// $primary: SeaGreen;
+// $body-bg: Steelblue;
 
-@import "~bootstrap/scss/bootstrap.scss";
+// @import "~bootstrap/scss/bootstrap.scss";
 
 .main-content {
     padding-top: 20px; 
   }
 
   body {
-    font-family: 'Roboto', sans-serif; /* Load Roboto or any other smooth font */
-    background-color: #f5f5f5; /* Light gray for main background */
-    color: #333; /* Dark gray for text */
+    background-color: #f0f0f0; // A light gray background for the body
+    color: #333; // Darker text color for better contrast
+    font-family: 'Arial', sans-serif; // Smooth typography
   }
   
   .navbar {
-    background-color: #3b5998; /* Complementary color for navbar */
-    color: white;
+    background-color: #282c34; // Dark background for the navbar
+    color: #fff; // White text color for better visibility
+  
+    .navbar-brand,
+    .nav-link {
+      color: #fff; // White text for brand and links
+      &:hover {
+        color: #61dafb; // Light blue color on hover for links
+      }
+    }
   }
   
-  .navbar-brand, .navbar-nav .nav-link {
-    color: white !important;
+  .main-content {
+    padding: 20px; // Space between navbar and content
+    background-color: #ffffff; // White background for main content
+    border-radius: 5px; // Slightly rounded corners
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
   }
   
-  .navbar-nav .nav-link:hover {
-    color: #ddd !important; /* Lighter hover color for links */
+  input[type="text"], 
+  input[type="email"], 
+  input[type="date"], 
+  textarea {
+    background-color: #f9f9f9; // Light background for input fields
+    color: #333; // Dark text for input fields
+    border: 1px solid #ccc; // Light border for input fields
   }
   
-  .form-control {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    color: #333;
-  }
-  
-  .form-control:focus {
-    border-color: #3b5998; /* Match with navbar color for a consistent look */
-    box-shadow: 0 0 5px rgba(59, 89, 152, 0.5); /* Slight shadow effect */
+  input[type="text"]:focus, 
+  input[type="email"]:focus, 
+  input[type="date"]:focus, 
+  textarea:focus {
+    border-color: #61dafb; // Change border color on focus
+    outline: none; // Remove default outline
   }
   
