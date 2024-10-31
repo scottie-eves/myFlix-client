@@ -17,9 +17,14 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? {...storedUser, FavoriteMovies: storedUser.FavoriteMovies || [] } : { FavoriteMovies: [] });
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const saveUserToLocalStorage = (updatedUser) => {
     localStorage.setItem('user', JSON.stringify(updatedUser)); // Persist updated user to localStorage
+  };
+
+  const handleSearch = (query) => {
+    setSearchTerm(query.toLowerCase());
   };
 
   const addFavorite = (movieId) => {
@@ -136,6 +141,10 @@ export const MainView = () => {
 
   console.log("user" , user);
 
+  const filteredMovies = movies.filter((movie) =>
+  movie.title.toLowerCase().includes(searchTerm)
+     );
+
   return (
     <BrowserRouter>
     <NavigationBar
@@ -144,6 +153,7 @@ export const MainView = () => {
       setUser(null);
       setToken(null);
     }}
+    onSearch={handleSearch}
     />
     <Row className="justify-content-md-center">
       <Routes>
@@ -215,11 +225,11 @@ export const MainView = () => {
             <>
               {!user ? (
                 <Navigate to="/login" replace />
-              ) : movies.length === 0 ? (
-                <Col>No movies!</Col>
+              ) : filteredMovies.length === 0 ? (
+                <Col>No movies found!</Col>
               ) : (
                 <>
-                {movies.map((movies) => (
+                {filteredMovies.map((movies) => (
                   <Col className="mb-4" key={movies._id} md={3}>
                     <MovieCard 
                     movie={movies}
