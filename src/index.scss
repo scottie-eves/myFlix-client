@@ -2,3 +2,31 @@ $primary: SeaGreen;
 $body-bg: Steelblue;
 
 @import "~bootstrap/scss/bootstrap.scss";
+
+input[type="search"],
+input[type="text"],
+input[type="email"],
+input[type="date"],
+textarea {
+  background-color: #f9f9f9; // Match the main content background
+  color: #333; // Dark text for better contrast
+  border: 1px solid #ccc; // Light border for input fields
+}
+
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+  border-color: #61dafb; // Change border color on focus
+  outline: none; // Remove default outline
+}
+
+.main-content {
+    margin-top: 20px; // Add margin to create space from the navbar
+    padding: 20px; // Existing padding
+    background-color: #ffffff; // Existing background color
+    border-radius: 5px; // Existing border radius
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Existing shadow
+  }
+  
