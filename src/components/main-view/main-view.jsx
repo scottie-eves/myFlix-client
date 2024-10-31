@@ -90,7 +90,6 @@ export const MainView = () => {
   
       // Update state with the returned updated user data
       setUser(updatedUser);
-      setProfileUser(updatedUser); // Ensure ProfileView reflects the update
       saveUserToLocalStorage(updatedUser);
   
       // Update movie's favorite status in local movie list
